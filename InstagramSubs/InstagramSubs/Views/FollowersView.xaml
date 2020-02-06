@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    x:Class="InstagramSubs.Views.FollowersView">
+
+    <StackLayout>
+        <StackLayout>
+            <Label
+                x:Name="NickNameLabel"
+                Text="anton.ukrainets"
+                HorizontalOptions="Center"/>
+            <Image 
+                x:Name="ProfileImage"
+                HorizontalOptions="Center"
+                HeightRequest="45"
+                WidthRequest="45"/>
+            <Label
+                x:Name="CountCurrentFollowersLabel"
+                HorizontalOptions="Center"
+                Text="400"/>
+        </StackLayout>
+
+        <StackLayout
+            Margin="10, 0, 10, 0">
+            <StackLayout 
+                Orientation="Horizontal">
+                <Image 
+                    x:Name="FollowersImage"
+                    HorizontalOptions="Center"
+                    WidthRequest="10"
+                    HeightRequest="10"/>
+                <Label 
+                    x:Name="FollowersLabel"
+                    HorizontalOptions="Center"
+                    Text="Followers"/>
+            </StackLayout>
+            <CollectionView 
+                x:Name="FollowersPricesListView"
+                ItemsSource="{Binding FollowersPrices}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout 
+                            Orientation="Horizontal"
+                            HorizontalOptions="FillAndExpand">
+                            <Label
+                                x:Name="CountFollowersToBuyLabel"
+                                VerticalTextAlignment="Center"
+                                HorizontalOptions="Start"
+                                Text="{Binding Count}"/>
+                            <Label
+                                x:Name="PriceFollowersLabel"
+                                VerticalTextAlignment="Center"
+                                HorizontalOptions="EndAndExpand"
+                                Text="{Binding Price}"/>
+                            <Button
+                                x:Name="GetFollowersButton"
+                                HorizontalOptions="End"
+                                Text="{Binding Get}"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>
