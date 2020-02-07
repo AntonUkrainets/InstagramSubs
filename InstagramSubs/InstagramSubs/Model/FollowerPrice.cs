@@ -1,9 +1,13 @@
-﻿namespace InstagramSubs.Model
+﻿using Xamarin.Forms;
+
+namespace InstagramSubs.Model
 {
     public class FollowerPrice
     {
         public string Count { get; set; }
         public string Price { get; set; }
         public string Get { get; set; }
+
+        public ImageSource Icon { get; set; }
     }
 }

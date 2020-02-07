@@ -7,7 +7,7 @@
     x:Class="InstagramSubs.Views.FollowersView">
 
     <StackLayout>
-        <StackLayout>
+        <StackLayout BackgroundColor="LightBlue">
             <Label
                 x:Name="UserNameLabel"
                 HorizontalOptions="Center"/>
@@ -16,23 +16,31 @@
                 HorizontalOptions="Center"
                 HeightRequest="45"
                 WidthRequest="45"/>
-            <Label
+            <StackLayout
+                Orientation="Horizontal"
+                HorizontalOptions="Center">
+                <Image 
+                    x:Name="CountFollowersImage"
+                    WidthRequest="20"
+                    HeightRequest="20"/>
+                <Label
                 x:Name="CountCurrentFollowersLabel"
                 HorizontalOptions="Center"/>
+            </StackLayout>
         </StackLayout>
 
         <StackLayout
             Margin="10, 0, 10, 0">
             <StackLayout 
-                Orientation="Horizontal">
+                Orientation="Horizontal"
+                HorizontalOptions="Center">
                 <Image 
                     x:Name="FollowersImage"
                     HorizontalOptions="Center"
-                    WidthRequest="10"
-                    HeightRequest="10"/>
+                    WidthRequest="20"
+                    HeightRequest="20"/>
                 <Label 
                     x:Name="FollowersLabel"
-                    HorizontalOptions="Center"
                     Text="Followers"/>
             </StackLayout>
             <CollectionView 
@@ -43,18 +51,23 @@
                         <StackLayout 
                             Orientation="Horizontal"
                             HorizontalOptions="FillAndExpand">
+                            <StackLayout
+                                Orientation="Horizontal">
+                                <Image 
+                                    Source="{Binding Icon}"
+                                    HorizontalOptions="Center"
+                                    WidthRequest="20"
+                                    HeightRequest="20"/>
+                                <Label
+                                    VerticalTextAlignment="Center"
+                                    HorizontalOptions="Start"
+                                    Text="{Binding Count}"/>
+                            </StackLayout>
                             <Label
-                                x:Name="CountFollowersToBuyLabel"
-                                VerticalTextAlignment="Center"
-                                HorizontalOptions="Start"
-                                Text="{Binding Count}"/>
-                            <Label
-                                x:Name="PriceFollowersLabel"
                                 VerticalTextAlignment="Center"
                                 HorizontalOptions="EndAndExpand"
                                 Text="{Binding Price}"/>
                             <Button
-                                x:Name="GetFollowersButton"
                                 HorizontalOptions="End"
                                 Text="{Binding Get}"/>
                         </StackLayout>

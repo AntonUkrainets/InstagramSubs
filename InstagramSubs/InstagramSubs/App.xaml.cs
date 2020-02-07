@@ -23,9 +23,9 @@ namespace InstagramSubs
         {
             InitializeComponent();
 
-            //await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            await NavigationService.NavigateAsync("NavigationPage/MainPage");
 
-            await NavigationService.NavigateAsync(nameof(NavigationPage) + "/" + nameof(FollowersView));
+            //await NavigationService.NavigateAsync(nameof(NavigationPage) + "/" + nameof(FollowersView));
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -34,6 +34,7 @@ namespace InstagramSubs
 
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<FollowersView, FollowersViewModel>();
+            containerRegistry.RegisterForNavigation<SettingsView, SettingsViewModel>();
         }
     }
 }

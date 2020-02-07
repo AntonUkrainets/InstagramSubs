@@ -4,94 +4,60 @@ using InstagramApiSharp.API.Builder;
 using InstagramApiSharp.Classes;
 using InstagramApiSharp.Classes.Models;
 using InstagramApiSharp.Logger;
-using InstagramSubs.Repository.Interfaces;
-using System;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace InstagramSubs.API
 {
     public class InstagramAPI
     {
-        public IInstaApi InstaApi { get; private set; }
+        private IInstaApi _instaApi;
 
-        public InstaCurrentUser _currentUser { get; private set; }
-        public int _countFollowers { get; private set; }
-
-        private Action _initProfileFields;
-
-        private readonly IRepository<Model.InstaUser> _repository;
-
-        public InstagramAPI(Action initProfileFields)
+        public InstagramAPI(string userName, string password)
         {
-            _initProfileFields = initProfileFields;
+            var userSessionData = new UserSessionData
+            {
+                UserName = userName,
+                Password = password
+            };
 
-            _repository = Repository.Implements.Repository.GetInstance();
+            _instaApi = CreateInstaInstance(userSessionData);
         }
 
-        private IInstaApi CreateInstaInstance()
+        private IInstaApi CreateInstaInstance(UserSessionData userSessionData)
         {
-            var userData = CreateUserData();
-
-            InstaApi = InstaApiBuilder.CreateBuilder()
-                .SetUser(userData)
+            return InstaApiBuilder.CreateBuilder()
+                .SetUser(userSessionData)
                 .UseLogger(new DebugLogger(LogLevel.All)) //Проходить все уровни аутентификаций
                 .SetRequestDelay(RequestDelay.FromSeconds(min: 0, max: 1)) //Промежуток очереди запросов
                 .Build();
-
-            return InstaApi;
         }
 
-        public async void CreateConnect()
+        private async Task LoginAsync()
         {
-            CreateInstaInstance();
-            LoadSession();
+            _instaApi.SessionHandler?.Load();
 
-            if (!InstaApi.IsUserAuthenticated)
-            {
-                var logInResult = await InstaApi.LoginAsync();
+            await _instaApi.LoginAsync();
 
-                if (logInResult.Succeeded)
-                {
-                    SaveSession();
-
-                    var userTask = await InstaApi.UserProcessor.GetCurrentUserAsync();
-                    _currentUser = userTask.Value;
-
-                    var followersTask = await InstaApi.UserProcessor.GetCurrentUserFollowersAsync(PaginationParameters.Empty);
-                    _countFollowers = followersTask.Value.Count;
-
-                    _initProfileFields.Invoke();
-                }
-            }
-        }
-
-        private UserSessionData CreateUserData()
-        {
-            var instaUser = _repository.GetAll().FirstOrDefault();
-
-            var userData = new UserSessionData
-            {
-                UserName = instaUser.Name,
-                Password = instaUser.Password
-            };
-
-            return userData;
-        }
-
-        private void LoadSession()
-        {
-            InstaApi?.SessionHandler?.Load();
-        }
-
-        private void SaveSession()
-        {
-            if (InstaApi == null)
+            if (!_instaApi.IsUserAuthenticated)
                 return;
 
-            if (!InstaApi.IsUserAuthenticated)
-                return;
+            _instaApi.SessionHandler?.Save();
+        }
 
-            InstaApi?.SessionHandler?.Save();
+        public async Task<IResult<InstaCurrentUser>> GetCurrentUserAsync()
+        {
+            if (!_instaApi.IsUserAuthenticated)
+                await LoginAsync();
+
+            return await _instaApi.UserProcessor.GetCurrentUserAsync();
+        }
+
+        public async Task<IResult<InstaUserShortList>> GetCurrentUserFollowersAsync()
+        {
+            if (!_instaApi.IsUserAuthenticated)
+                await LoginAsync();
+
+            return await _instaApi.UserProcessor.GetCurrentUserFollowersAsync(PaginationParameters.Empty);
         }
     }
 }

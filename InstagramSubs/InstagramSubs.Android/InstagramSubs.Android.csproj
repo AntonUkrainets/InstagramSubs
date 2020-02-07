@@ -107,7 +107,8 @@
     <AndroidResource Include="Resources\drawable\Profile.jpeg" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\drawable\FollowerIcon.jpeg" />
+    <AndroidResource Include="Resources\drawable\Follower.jpg" />
+    <AndroidResource Include="Resources\drawable\FollowerIcon.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

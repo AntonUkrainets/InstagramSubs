@@ -1,7 +1,10 @@
-﻿using InstagramSubs.API;
+﻿using InstagramApiSharp.Classes;
+using InstagramApiSharp.Classes.Models;
+using InstagramSubs.API;
 using InstagramSubs.Model;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,48 +15,66 @@ namespace InstagramSubs.Views
     {
         private ICollection<FollowerPrice> _followersPrices;
         private InstagramAPI _instagramApi;
-        private Action _initProfileFields;
+
+        private InstaCurrentUser _currentUser;
+        private InstaUserShortList _followers;
 
         public FollowersView()
         {
             InitializeComponent();
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
 
-            InitImages();
+            _instagramApi = new InstagramAPI("Bobby_Layout", "Bobby.Layout");
+
+            await LoadAsync();
+
+            InitProfileFields();
+
             InitFollowersPricesListView();
+        }
 
-            _initProfileFields = new Action(InitProfileFields);
+        private async Task LoadAsync()
+        {
+            var getCurrentUserResult = await _instagramApi.GetCurrentUserAsync();
 
-            _instagramApi = new InstagramAPI(_initProfileFields);
-            _instagramApi.CreateConnect();
+            _currentUser = getCurrentUserResult.Value;
+
+            var getCurrentUserFollowersResult = await _instagramApi.GetCurrentUserFollowersAsync();
+
+            _followers = getCurrentUserFollowersResult.Value;
         }
 
         private void InitProfileFields()
         {
-            UserNameLabel.Text = $"{_instagramApi._currentUser.UserName}";
-            CountCurrentFollowersLabel.Text = $"{_instagramApi._countFollowers}";
+            InitImages();
+
+            UserNameLabel.Text = $"{_currentUser.UserName}";
+            CountCurrentFollowersLabel.Text = $"{_followers.Count}";
         }
 
         private void InitImages()
         {
-            ProfileImage.Source = ImageSource.FromFile("Profile.jpeg");
-            FollowersImage.Source = ImageSource.FromFile("FollowerIcon.jpeg");
+            ProfileImage.Source = _currentUser.ProfilePicture;
+            FollowersImage.Source = ImageSource.FromFile("FollowerIcon.jpg");
+            CountFollowersImage.Source = ImageSource.FromFile("FollowerIcon.jpg");
         }
 
         private void InitFollowersPricesListView()
         {
+            var followerIcon = ImageSource.FromFile("FollowerIcon.jpg");
+
             _followersPrices = new List<FollowerPrice>
             {
-                new FollowerPrice { Count = "25", Price = "9.99$", Get = "Get" },
-                new FollowerPrice { Count = "3", Price = "0.99$", Get = "Get" },
-                new FollowerPrice { Count = "12", Price = "4.99$", Get = "Get" },
-                new FollowerPrice { Count = "60", Price = "19.99$", Get = "Get" },
-                new FollowerPrice { Count = "180", Price = "49.99$", Get = "Get" },
-                new FollowerPrice { Count = "400", Price = "99.99$", Get = "Get" }
+                new FollowerPrice { Count = "25", Price = "9.99$", Get = "Get", Icon =  followerIcon },
+                new FollowerPrice { Count = "3", Price = "0.99$", Get = "Get", Icon =  followerIcon },
+                new FollowerPrice { Count = "12", Price = "4.99$", Get = "Get", Icon =  followerIcon },
+                new FollowerPrice { Count = "60", Price = "19.99$", Get = "Get", Icon =  followerIcon },
+                new FollowerPrice { Count = "180", Price = "49.99$", Get = "Get", Icon =  followerIcon },
+                new FollowerPrice { Count = "400", Price = "99.99$", Get = "Get", Icon =  followerIcon }
             };
 
             FollowersPricesListView.ItemsSource = _followersPrices;
