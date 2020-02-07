@@ -1,13 +1,7 @@
-﻿using InstagramApiSharp;
-using InstagramApiSharp.API;
-using InstagramApiSharp.API.Builder;
-using InstagramApiSharp.Classes;
-using InstagramApiSharp.Classes.SessionHandlers;
-using InstagramApiSharp.Logger;
-using InstagramSubs.API;
+﻿using InstagramSubs.API;
 using InstagramSubs.Model;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,20 +10,32 @@ namespace InstagramSubs.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FollowersView : ContentPage
     {
-        private InstagramAPI _instagramAPI;
-
-        private ICollection<FollowerPrice> FollowersPrices { get; set; }
+        private ICollection<FollowerPrice> _followersPrices;
+        private InstagramAPI _instagramApi;
+        private Action _initProfileFields;
 
         public FollowersView()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
 
             InitImages();
-
             InitFollowersPricesListView();
 
-            _instagramAPI = new InstagramAPI();
-            _instagramAPI.CreateConnect();
+            _initProfileFields = new Action(InitProfileFields);
+
+            _instagramApi = new InstagramAPI(_initProfileFields);
+            _instagramApi.CreateConnect();
+        }
+
+        private void InitProfileFields()
+        {
+            UserNameLabel.Text = $"{_instagramApi._currentUser.UserName}";
+            CountCurrentFollowersLabel.Text = $"{_instagramApi._countFollowers}";
         }
 
         private void InitImages()
@@ -40,7 +46,7 @@ namespace InstagramSubs.Views
 
         private void InitFollowersPricesListView()
         {
-            FollowersPrices = new List<FollowerPrice>
+            _followersPrices = new List<FollowerPrice>
             {
                 new FollowerPrice { Count = "25", Price = "9.99$", Get = "Get" },
                 new FollowerPrice { Count = "3", Price = "0.99$", Get = "Get" },
@@ -50,7 +56,7 @@ namespace InstagramSubs.Views
                 new FollowerPrice { Count = "400", Price = "99.99$", Get = "Get" }
             };
 
-            FollowersPricesListView.ItemsSource = FollowersPrices;
+            FollowersPricesListView.ItemsSource = _followersPrices;
         }
     }
 }

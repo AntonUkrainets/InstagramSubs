@@ -9,8 +9,7 @@
     <StackLayout>
         <StackLayout>
             <Label
-                x:Name="NickNameLabel"
-                Text="anton.ukrainets"
+                x:Name="UserNameLabel"
                 HorizontalOptions="Center"/>
             <Image 
                 x:Name="ProfileImage"
@@ -19,8 +18,7 @@
                 WidthRequest="45"/>
             <Label
                 x:Name="CountCurrentFollowersLabel"
-                HorizontalOptions="Center"
-                Text="400"/>
+                HorizontalOptions="Center"/>
         </StackLayout>
 
         <StackLayout

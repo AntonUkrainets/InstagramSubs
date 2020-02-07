@@ -1,33 +1,44 @@
-﻿using InstagramApiSharp.API;
+﻿using InstagramApiSharp;
+using InstagramApiSharp.API;
 using InstagramApiSharp.API.Builder;
 using InstagramApiSharp.Classes;
-using InstagramApiSharp.Classes.SessionHandlers;
+using InstagramApiSharp.Classes.Models;
 using InstagramApiSharp.Logger;
+using InstagramSubs.Repository.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Text;
+using System.Linq;
 
 namespace InstagramSubs.API
 {
     public class InstagramAPI
     {
-        private IInstaApi _instaApi;
+        public IInstaApi InstaApi { get; private set; }
 
-        public InstagramAPI()
+        public InstaCurrentUser _currentUser { get; private set; }
+        public int _countFollowers { get; private set; }
+
+        private Action _initProfileFields;
+
+        private readonly IRepository<Model.InstaUser> _repository;
+
+        public InstagramAPI(Action initProfileFields)
         {
+            _initProfileFields = initProfileFields;
+
+            _repository = Repository.Implements.Repository.GetInstance();
         }
 
-        private void CreateInstaInstance()
+        private IInstaApi CreateInstaInstance()
         {
             var userData = CreateUserData();
 
-            _instaApi = InstaApiBuilder.CreateBuilder()
+            InstaApi = InstaApiBuilder.CreateBuilder()
                 .SetUser(userData)
                 .UseLogger(new DebugLogger(LogLevel.All)) //Проходить все уровни аутентификаций
                 .SetRequestDelay(RequestDelay.FromSeconds(min: 0, max: 1)) //Промежуток очереди запросов
                 .Build();
+
+            return InstaApi;
         }
 
         public async void CreateConnect()
@@ -35,34 +46,33 @@ namespace InstagramSubs.API
             CreateInstaInstance();
             LoadSession();
 
-            if (!_instaApi.IsUserAuthenticated)
+            if (!InstaApi.IsUserAuthenticated)
             {
-                var logInResult = await _instaApi.LoginAsync();
+                var logInResult = await InstaApi.LoginAsync();
 
                 if (logInResult.Succeeded)
-                    SaveSession();
-                else
                 {
-                    if (logInResult.Value == InstaLoginResult.ChallengeRequired)
-                    {
-                        var challenge = await _instaApi.GetChallengeRequireVerifyMethodAsync();
-                        if (challenge.Succeeded)
-                        {
-                            //var topicalExlope = await _instaApi.FeedProcessor.GetTopicalExploreFeedAsync(PaginationParameters.MaxPagesToLoad(1));
-                            //var values = topicalExlope.Value;
-                        }
-                    }
+                    SaveSession();
+
+                    var userTask = await InstaApi.UserProcessor.GetCurrentUserAsync();
+                    _currentUser = userTask.Value;
+
+                    var followersTask = await InstaApi.UserProcessor.GetCurrentUserFollowersAsync(PaginationParameters.Empty);
+                    _countFollowers = followersTask.Value.Count;
+
+                    _initProfileFields.Invoke();
                 }
             }
         }
 
         private UserSessionData CreateUserData()
         {
-            var userData = new UserSessionData()
-            {
-                UserName = "Bobby_Layout",
-                Password = "Bobby.Layout",
+            var instaUser = _repository.GetAll().FirstOrDefault();
 
+            var userData = new UserSessionData
+            {
+                UserName = instaUser.Name,
+                Password = instaUser.Password
             };
 
             return userData;
@@ -70,18 +80,18 @@ namespace InstagramSubs.API
 
         private void LoadSession()
         {
-            _instaApi?.SessionHandler?.Load();
+            InstaApi?.SessionHandler?.Load();
         }
 
         private void SaveSession()
         {
-            if (_instaApi == null)
+            if (InstaApi == null)
                 return;
 
-            if (!_instaApi.IsUserAuthenticated)
+            if (!InstaApi.IsUserAuthenticated)
                 return;
 
-            //_instaApi.SessionHandler.Save();
+            InstaApi?.SessionHandler?.Save();
         }
     }
 }
