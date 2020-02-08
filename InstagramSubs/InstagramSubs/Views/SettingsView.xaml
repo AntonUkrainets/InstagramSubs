@@ -5,29 +5,59 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="InstagramSubs.Views.SettingsView"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             BackgroundColor="Wheat">
 
     <StackLayout>
         <StackLayout
             Orientation="Horizontal"
-            BackgroundColor="LightBlue">
-            <Button 
-                x:Name="SettingsButton"
-                Text="Settings"/>
-            <Label 
-                Text="Settings"
-                HorizontalOptions="Center"
-                VerticalTextAlignment="Center"/>
-        </StackLayout>
-        <StackLayout
-            Orientation="Horizontal">
+            BackgroundColor="#0135E5">
             <Image
                 x:Name="ProfileSettingsImage"
                 WidthRequest="45"
                 HeightRequest="45"/>
             <Label
-                x:Name="ProfileNameLabel"/>
+                x:Name="ProfileNameLabel"
+                VerticalTextAlignment="Center"
+                TextColor="White"
+                FontAttributes="Bold"/>
         </StackLayout>
+        <ListView
+            x:Name="ShopsList">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <Image 
+                                Source="{Binding Shop Image}"
+                                WidthRequest="20"
+                                HeightRequest="20"/>
+                            <Label 
+                                Text="{Binding Shop}"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <!--<StackLayout>
+            <Label
+                HorizontalOptions="FillAndExpand"
+                VerticalTextAlignment="Center"
+                BackgroundColor="White"
+                Text="Coins Store"/>
+            <Label
+                HorizontalOptions="FillAndExpand"
+                VerticalTextAlignment="Center"
+                BackgroundColor="White"
+                Text="Free Coins"/>
+        </StackLayout>
+        <StackLayout>
+            <Label
+                HorizontalOptions="FillAndExpand"
+                VerticalTextAlignment="Center"
+                BackgroundColor="White"
+                Text="Settings"/>
+        </StackLayout>-->
     </StackLayout>
 
 </ContentPage>

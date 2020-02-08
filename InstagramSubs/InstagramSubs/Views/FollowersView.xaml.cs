@@ -1,8 +1,6 @@
-﻿using InstagramApiSharp.Classes;
-using InstagramApiSharp.Classes.Models;
-using InstagramSubs.API;
+﻿using InstagramSubs.API;
 using InstagramSubs.Model;
-using System;
+using Prism.Ioc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -16,8 +14,7 @@ namespace InstagramSubs.Views
         private ICollection<FollowerPrice> _followersPrices;
         private InstagramAPI _instagramApi;
 
-        private InstaCurrentUser _currentUser;
-        private InstaUserShortList _followers;
+        private UserContext _userContext;
 
         public FollowersView()
         {
@@ -28,9 +25,14 @@ namespace InstagramSubs.Views
         {
             base.OnAppearing();
 
-            _instagramApi = new InstagramAPI("Bobby_Layout", "Bobby.Layout");
+            _userContext = App.Current.Container.Resolve<UserContext>();
 
-            await LoadAsync();
+            if (string.IsNullOrEmpty(_userContext.User.Name))
+            {
+                _instagramApi = App.Current.Container.Resolve<InstagramAPI>();
+
+                await LoadAsync();
+            }
 
             InitProfileFields();
 
@@ -41,24 +43,24 @@ namespace InstagramSubs.Views
         {
             var getCurrentUserResult = await _instagramApi.GetCurrentUserAsync();
 
-            _currentUser = getCurrentUserResult.Value;
+            _userContext.User.Name = getCurrentUserResult.Value.UserName;
 
             var getCurrentUserFollowersResult = await _instagramApi.GetCurrentUserFollowersAsync();
 
-            _followers = getCurrentUserFollowersResult.Value;
+            _userContext.FollowersNumber = getCurrentUserFollowersResult.Value.Count;
         }
 
         private void InitProfileFields()
         {
             InitImages();
 
-            UserNameLabel.Text = $"{_currentUser.UserName}";
-            CountCurrentFollowersLabel.Text = $"{_followers.Count}";
+            UserNameLabel.Text = $"{_userContext.User.Name}";
+            CountCurrentFollowersLabel.Text = $"{_userContext.FollowersNumber}";
         }
 
         private void InitImages()
         {
-            ProfileImage.Source = _currentUser.ProfilePicture;
+            ProfileImage.Source = _userContext.User.AvatarUri;
             FollowersImage.Source = ImageSource.FromFile("FollowerIcon.jpg");
             CountFollowersImage.Source = ImageSource.FromFile("FollowerIcon.jpg");
         }

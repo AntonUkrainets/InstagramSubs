@@ -4,6 +4,8 @@ using InstagramSubs.ViewModels;
 using InstagramSubs.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using InstagramSubs.API;
+using InstagramSubs.Model;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace InstagramSubs
@@ -30,6 +32,11 @@ namespace InstagramSubs
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterInstance<InstagramAPI>(
+                new InstagramAPI("Bobby_Layout", "Bobby.Layout")
+                );
+
+            containerRegistry.RegisterSingleton<UserContext>();
             containerRegistry.RegisterForNavigation<NavigationPage>();
 
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
