@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using InstagramSubs.API;
 using InstagramSubs.Model;
+using InstagramSubs.Views.Stores;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace InstagramSubs
@@ -42,6 +43,9 @@ namespace InstagramSubs
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<FollowersView, FollowersViewModel>();
             containerRegistry.RegisterForNavigation<SettingsView, SettingsViewModel>();
+            containerRegistry.RegisterForNavigation<StoreView, StoreViewViewModel>();
+            containerRegistry.RegisterForNavigation<BuyStoreView, BuyStoreViewViewModel>();
+            containerRegistry.RegisterForNavigation<FreeStoreView, FreeStoreViewViewModel>();
         }
     }
 }

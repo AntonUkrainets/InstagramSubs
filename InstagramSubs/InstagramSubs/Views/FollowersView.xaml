@@ -4,77 +4,186 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="http://prismlibrary.com"
     prism:ViewModelLocator.AutowireViewModel="True"
-    x:Class="InstagramSubs.Views.FollowersView">
+    x:Class="InstagramSubs.Views.FollowersView"
+    BackgroundColor="#F7F8FA"
+    Title="{Binding Title}">
 
-    <StackLayout>
-        <StackLayout BackgroundColor="LightBlue">
-            <Label
-                x:Name="UserNameLabel"
-                HorizontalOptions="Center"/>
-            <Image 
-                x:Name="ProfileImage"
-                HorizontalOptions="Center"
-                HeightRequest="45"
-                WidthRequest="45"/>
-            <StackLayout
-                Orientation="Horizontal"
-                HorizontalOptions="Center">
-                <Image 
-                    x:Name="CountFollowersImage"
-                    WidthRequest="20"
-                    HeightRequest="20"/>
-                <Label
-                x:Name="CountCurrentFollowersLabel"
-                HorizontalOptions="Center"/>
-            </StackLayout>
-        </StackLayout>
-
-        <StackLayout
-            Margin="10, 0, 10, 0">
+    <!--<ScrollView>-->
+        <StackLayout>
             <StackLayout 
-                Orientation="Horizontal"
-                HorizontalOptions="Center">
+                BackgroundColor="#1964c1">
+                <Label
+                    x:Name="UserNameLabel"
+                    TextColor="White"
+                    HorizontalOptions="Center"/>
                 <Image 
-                    x:Name="FollowersImage"
+                    x:Name="ProfileImage"
                     HorizontalOptions="Center"
-                    WidthRequest="20"
-                    HeightRequest="20"/>
-                <Label 
-                    x:Name="FollowersLabel"
-                    Text="Followers"/>
+                    HeightRequest="45"
+                    WidthRequest="45"/>
+                <StackLayout
+                    Orientation="Horizontal"
+                    HorizontalOptions="Center"
+                    BackgroundColor="White"
+                    Padding="10, 0, 10, 0"
+                    Margin="0, 0, 0, 10">
+                    <Image 
+                        x:Name="CountFollowersImage"
+                        WidthRequest="20"
+                        HeightRequest="20"/>
+                    <Label
+                        x:Name="CountCurrentFollowersLabel"
+                        TextColor="#5696D6"
+                        HorizontalOptions="Center"/>
+                </StackLayout>
             </StackLayout>
-            <CollectionView 
-                x:Name="FollowersPricesListView"
-                ItemsSource="{Binding FollowersPrices}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout 
-                            Orientation="Horizontal"
-                            HorizontalOptions="FillAndExpand">
-                            <StackLayout
-                                Orientation="Horizontal">
-                                <Image 
-                                    Source="{Binding Icon}"
-                                    HorizontalOptions="Center"
-                                    WidthRequest="20"
-                                    HeightRequest="20"/>
-                                <Label
-                                    VerticalTextAlignment="Center"
-                                    HorizontalOptions="Start"
-                                    Text="{Binding Count}"/>
-                            </StackLayout>
-                            <Label
-                                VerticalTextAlignment="Center"
-                                HorizontalOptions="EndAndExpand"
-                                Text="{Binding Price}"/>
-                            <Button
-                                HorizontalOptions="End"
-                                Text="{Binding Get}"/>
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </StackLayout>
-    </StackLayout>
 
+            <StackLayout
+                Padding="30, 0, 30, 0">
+                <StackLayout
+                    Orientation="Horizontal">
+                    <Frame 
+                        BorderColor="Black"
+                        BackgroundColor="White">
+                        <StackLayout>
+                            <Label
+                                x:Name="CountNewSubsLabel"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                Text="12"
+                                FontAttributes="Bold"
+                                TextColor="Black"/>
+                            <Label
+                                Text="New Subscribers"
+                                HorizontalOptions="Center"
+                                VerticalOptions="EndAndExpand"/>
+                        </StackLayout>
+                    </Frame>
+                    <Frame 
+                        BorderColor="Black"
+                        BackgroundColor="White">
+                        <StackLayout>
+                            <Label 
+                                x:Name="CountLostSubsLabel"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                Text="16"
+                                FontAttributes="Bold"
+                                TextColor="Black"/>
+                            <Label 
+                                Text="Lost Subscribers"
+                                HorizontalOptions="Center"
+                                VerticalOptions="EndAndExpand"/>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+                <StackLayout 
+                    Orientation="Horizontal">
+                    <Frame 
+                        BorderColor="Black"
+                        BackgroundColor="White">
+                        <StackLayout>
+                            <Label 
+                                x:Name="CountIDontFollowLabel"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                Text="212"
+                                FontAttributes="Bold"
+                                TextColor="Black"/>
+                            <Label 
+                                Text="I Dont follow them"
+                                HorizontalOptions="Center"
+                                VerticalOptions="EndAndExpand"/>
+                        </StackLayout>
+                    </Frame>
+                    <Frame 
+                        BorderColor="Black"
+                        BackgroundColor="White">
+                        <StackLayout>
+                            <Label 
+                                x:Name="CountDontFollowMeLabel"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                Text="74"
+                                FontAttributes="Bold"
+                                TextColor="Black"/>
+                            <Label 
+                                Text="Dont follow me"
+                                HorizontalOptions="Center"
+                                VerticalOptions="EndAndExpand"/>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout>
+                <StackLayout 
+                    Orientation="Horizontal"
+                    HorizontalOptions="Center"
+                    Margin="10, 0, 10, 0">
+                    <Image 
+                        x:Name="FollowersImage"
+                        HorizontalOptions="Center"
+                        WidthRequest="20"
+                        HeightRequest="20"/>
+                    <Label 
+                        x:Name="FollowersLabel"
+                        Text="Followers"
+                        TextColor="#3B90E0"/>
+                </StackLayout>
+
+                <ListView 
+                    x:Name="FollowersPricesListView" 
+                    BackgroundColor="Red"
+                    SeparatorVisibility="Default"
+                    SeparatorColor="Black">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout
+                                    Orientation="Horizontal"
+                                    HorizontalOptions="FillAndExpand"
+                                    BackgroundColor="White">
+                                    <StackLayout
+                                        Orientation="Horizontal">
+                                        <Image 
+                                            Source="{Binding Icon}"
+                                            HorizontalOptions="Center"
+                                            WidthRequest="20"
+                                            HeightRequest="20"/>
+                                        <Label
+                                            VerticalTextAlignment="Center"
+                                            HorizontalOptions="Start"
+                                            TextColor="#4b4b4b"
+                                            FontAttributes="Bold"
+                                            Text="{Binding Count}"/>
+                                    </StackLayout>
+                                    <StackLayout
+                                        Orientation="Horizontal"
+                                        HorizontalOptions="EndAndExpand">
+                                        <Label
+                                            VerticalTextAlignment="Center"
+                                            TextColor="#464646"
+                                            FontAttributes="Bold"
+                                            Text="{Binding Price}"/>
+                                        <Button
+                                            VerticalOptions="Center"
+                                            CornerRadius="20"
+                                            BorderWidth="5"
+                                            BorderColor="#4691D4"
+                                            FontAttributes="Bold"
+                                            BackgroundColor="White"
+                                            TextColor="#4691D4"
+                                            Text="{Binding Get}"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </StackLayout>
+
+        </StackLayout>
+    <!--</ScrollView>-->
 </ContentPage>

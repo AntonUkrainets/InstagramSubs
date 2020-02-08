@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="InstagramSubs.Views.SettingsView"
-             Title="{Binding Title}"
-             BackgroundColor="Wheat">
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    x:Class="InstagramSubs.Views.SettingsView"
+    Title="{Binding Title}"
+    BackgroundColor="#F7F8FA">
 
     <StackLayout>
         <StackLayout
@@ -22,42 +23,34 @@
                 TextColor="White"
                 FontAttributes="Bold"/>
         </StackLayout>
-        <ListView
-            x:Name="ShopsList">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout>
-                            <Image 
-                                Source="{Binding Shop Image}"
-                                WidthRequest="20"
-                                HeightRequest="20"/>
-                            <Label 
-                                Text="{Binding Shop}"/>
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <!--<StackLayout>
-            <Label
-                HorizontalOptions="FillAndExpand"
-                VerticalTextAlignment="Center"
-                BackgroundColor="White"
-                Text="Coins Store"/>
-            <Label
-                HorizontalOptions="FillAndExpand"
-                VerticalTextAlignment="Center"
-                BackgroundColor="White"
-                Text="Free Coins"/>
-        </StackLayout>
         <StackLayout>
-            <Label
-                HorizontalOptions="FillAndExpand"
-                VerticalTextAlignment="Center"
-                BackgroundColor="White"
-                Text="Settings"/>
-        </StackLayout>-->
+            <ListView
+                x:Name="ShopsList">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout
+                                Orientation="Horizontal"
+                                BackgroundColor="White">
+                                <Image 
+                                    Source="{Binding Image}"
+                                    WidthRequest="20"
+                                    HeightRequest="20"
+                                    Margin="10, 0, 0, 0"/>
+                                <Label 
+                                    Text="{Binding Name}"
+                                    VerticalTextAlignment="Center"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+        <!--<Label
+            BackgroundColor="White"
+            HorizontalOptions="FillAndExpand"
+            VerticalTextAlignment="Center"
+            Text="Settings"/>-->
     </StackLayout>
 
 </ContentPage>

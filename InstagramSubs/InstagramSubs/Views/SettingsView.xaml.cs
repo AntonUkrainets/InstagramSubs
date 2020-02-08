@@ -32,8 +32,9 @@ namespace InstagramSubs.Views
         {
             ShopsList.ItemsSource = new List<Shop>
             {
-                new Shop { Name = "Coins Store"},
-                new Shop { Name = "Free Coins"}
+                new Shop { Name = "Coins Store", Image = ImageSource.FromFile("Store.jpg") },
+                new Shop { Name = "Free Coins", Image = ImageSource.FromFile("FreeStore.jpg") },
+                new Shop { Name = "Settings", Image = ImageSource.FromFile("FreeStore.jpg") }
             };
         }
 

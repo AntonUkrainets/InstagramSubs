@@ -11,7 +11,6 @@ namespace InstagramSubs.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FollowersView : ContentPage
     {
-        private ICollection<FollowerPrice> _followersPrices;
         private InstagramAPI _instagramApi;
 
         private UserContext _userContext;
@@ -31,22 +30,19 @@ namespace InstagramSubs.Views
             {
                 _instagramApi = App.Current.Container.Resolve<InstagramAPI>();
 
-                await LoadAsync();
+                //await LoadAsync();
             }
 
             InitProfileFields();
-
-            InitFollowersPricesListView();
+            InitFollowersPricesList();
         }
 
         private async Task LoadAsync()
         {
             var getCurrentUserResult = await _instagramApi.GetCurrentUserAsync();
-
             _userContext.User.Name = getCurrentUserResult.Value.UserName;
 
             var getCurrentUserFollowersResult = await _instagramApi.GetCurrentUserFollowersAsync();
-
             _userContext.FollowersNumber = getCurrentUserFollowersResult.Value.Count;
         }
 
@@ -61,25 +57,23 @@ namespace InstagramSubs.Views
         private void InitImages()
         {
             ProfileImage.Source = _userContext.User.AvatarUri;
-            FollowersImage.Source = ImageSource.FromFile("FollowerIcon.jpg");
-            CountFollowersImage.Source = ImageSource.FromFile("FollowerIcon.jpg");
+            FollowersImage.Source = ImageSource.FromFile("Follower.png");
+            CountFollowersImage.Source = ImageSource.FromFile("Follower.png");
         }
 
-        private void InitFollowersPricesListView()
+        private void InitFollowersPricesList()
         {
-            var followerIcon = ImageSource.FromFile("FollowerIcon.jpg");
+            var followerIcon = ImageSource.FromFile("Follower.png");
 
-            _followersPrices = new List<FollowerPrice>
+            FollowersPricesListView.ItemsSource = new List<FollowerPrice>
             {
-                new FollowerPrice { Count = "25", Price = "9.99$", Get = "Get", Icon =  followerIcon },
-                new FollowerPrice { Count = "3", Price = "0.99$", Get = "Get", Icon =  followerIcon },
-                new FollowerPrice { Count = "12", Price = "4.99$", Get = "Get", Icon =  followerIcon },
-                new FollowerPrice { Count = "60", Price = "19.99$", Get = "Get", Icon =  followerIcon },
-                new FollowerPrice { Count = "180", Price = "49.99$", Get = "Get", Icon =  followerIcon },
-                new FollowerPrice { Count = "400", Price = "99.99$", Get = "Get", Icon =  followerIcon }
+                new FollowerPrice { Count = "25", Price = "9.99$", Get = "Get", Icon = followerIcon },
+                new FollowerPrice { Count = "3", Price = "0.99$", Get = "Get", Icon = followerIcon },
+                new FollowerPrice { Count = "12", Price = "4.99$", Get = "Get", Icon = followerIcon },
+                new FollowerPrice { Count = "60", Price = "19.99$", Get = "Get", Icon = followerIcon },
+                new FollowerPrice { Count = "180", Price = "49.99$", Get = "Get", Icon = followerIcon },
+                new FollowerPrice { Count = "400", Price = "99.99$", Get = "Get", Icon = followerIcon }
             };
-
-            FollowersPricesListView.ItemsSource = _followersPrices;
         }
     }
 }
