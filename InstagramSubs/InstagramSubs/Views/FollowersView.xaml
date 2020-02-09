@@ -3,10 +3,12 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="http://prismlibrary.com"
+    xmlns:instagramsubs="clr-namespace:InstagramSubs"
+    xmlns:viewmodels="clr-namespace:InstagramSubs.ViewModels"
     prism:ViewModelLocator.AutowireViewModel="True"
     x:Class="InstagramSubs.Views.FollowersView"
     BackgroundColor="#2196F3"
-    Title="{Binding Title}">
+    Title="Followers">
 
     <StackLayout>
         <StackLayout 
@@ -27,141 +29,137 @@
                 Padding="10, 0, 10, 0"
                 Margin="0, 0, 0, 10"
                 CornerRadius="10">
-            <StackLayout
+                <StackLayout
                 Orientation="Horizontal">
-                <Image 
+                    <Image 
                     x:Name="CountFollowersImage"
                     WidthRequest="20"
                     HeightRequest="20"/>
-                <Label
+                    <Label
                     x:Name="CountCurrentFollowersLabel"
                     TextColor="#5696D6"
                     HorizontalOptions="Center"/>
-            </StackLayout>
+                </StackLayout>
             </Frame>
         </StackLayout>
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
+
+            <!--#region New Subscribers-->
+            <Frame 
+                Grid.Row="0"
+                Grid.Column="0"
+                BorderColor="Black"
+                BackgroundColor="White"
+                CornerRadius="10"
+                Margin="5, 0, 5, 0">
+                <StackLayout>
+                    <Label
+                        x:Name="CountNewSubsLabel"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Text="0"
+                        FontAttributes="Bold"
+                        TextColor="Black"/>
+                    <Label
+                        Text="New Subscribers"
+                        HorizontalOptions="Center"
+                        FontAttributes="Bold"
+                        TextColor="Black"
+                        VerticalOptions="EndAndExpand"/>
+                </StackLayout>
+            </Frame>
+            <!--#endregion-->
+
+            <!--#region Lost Subscribers-->
+            <Frame 
+                Grid.Row="0"
+                Grid.Column="1"
+                BorderColor="Black"
+                BackgroundColor="White"
+                CornerRadius="10"
+                Margin="5, 0, 5, 0">
+                <StackLayout>
+                    <Label
+                        x:Name="CountLostSubsLabel"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Text="0"
+                        FontAttributes="Bold"
+                        TextColor="Black"/>
+                    <Label
+                        Text="Lost Subscribers"
+                        FontAttributes="Bold"
+                        TextColor="Black"
+                        HorizontalOptions="Center"
+                        VerticalOptions="EndAndExpand"/>
+                </StackLayout>
+            </Frame>
+            <!--#endregion-->
+
+            <!--#region I Dont follow them-->
+            <Frame
+                Grid.Row="1"
+                Grid.Column="0"
+                BorderColor="Black"
+                BackgroundColor="White"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                CornerRadius="10"
+                Margin="5, 0, 5, 0">
+                <StackLayout>
+                    <Label
+                        x:Name="CountIDontFollowLabel"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        FontAttributes="Bold"
+                        TextColor="Black"/>
+                    <Label
+                        Text="I Dont follow"
+                        HorizontalOptions="Center"
+                        FontAttributes="Bold"
+                        TextColor="Black"
+                        VerticalOptions="EndAndExpand"/>
+                </StackLayout>
+            </Frame>
+            <!--#endregion-->
+
+            <!--#region They dont follow me-->
+            <Frame
+                Grid.Row="1"
+                Grid.Column="1"
+                BorderColor="Black"
+                BackgroundColor="White"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                CornerRadius="10"
+                Margin="5, 0, 5, 0">
+                <StackLayout>
+                    <Label
+                        x:Name="CountDontFollowMeLabel"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        FontAttributes="Bold"
+                        TextColor="Black"/>
+                    <Label
+                        Text="They dont follow"
+                        FontAttributes="Bold"
+                        TextColor="Black"
+                        HorizontalOptions="Center"
+                        VerticalOptions="EndAndExpand"/>
+                </StackLayout>
+            </Frame>
+            <!--#endregion-->
         </Grid>
 
-        <StackLayout
-            Padding="30, 0, 30, 0">
-            <!--#region First Row-->
-            <StackLayout
-                Orientation="Horizontal">
-                <!--#region New Subscribers-->
-                <Frame 
-                    BorderColor="Black"
-                    BackgroundColor="White"
-                    Grid.Column="0"
-                    Grid.Row="0">
-                    <StackLayout>
-                        <Label
-                            x:Name="CountNewSubsLabel"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center"
-                            Text="0"
-                            FontAttributes="Bold"
-                            TextColor="Black"/>
-                        <Label
-                            Text="New Subscribers"
-                            HorizontalOptions="Center"
-                            FontAttributes="Bold"
-                            TextColor="Black"
-                            VerticalOptions="EndAndExpand"/>
-                    </StackLayout>
-                </Frame>
-                <!--#endregion-->
-                <!--#region Lost Subscribers-->
-                <Frame 
-                    BorderColor="Black"
-                    BackgroundColor="White"
-                    Grid.Column="1"
-                    Grid.Row="0">
-                    <StackLayout>
-                        <Label 
-                            x:Name="CountLostSubsLabel"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center"
-                            Text="0"
-                            FontAttributes="Bold"
-                            TextColor="Black"/>
-                        <Label 
-                            Text="Lost Subscribers"
-                            FontAttributes="Bold"
-                            TextColor="Black"
-                            HorizontalOptions="Center"
-                            VerticalOptions="EndAndExpand"/>
-                    </StackLayout>
-                </Frame>
-                <!--#endregion-->
-            </StackLayout>
-            <!--#endregion-->
-            
-            <!--#region Second Row-->
-            <StackLayout 
-                Orientation="Horizontal"
-                HorizontalOptions="FillAndExpand">
-                <!--#region I Dont follow them-->
-                <Frame 
-                    BorderColor="Black"
-                    BackgroundColor="White"
-                    HorizontalOptions="FillAndExpand"
-                    VerticalOptions="FillAndExpand"
-                    Grid.Column="0"
-                    Grid.Row="1">
-                    <StackLayout>
-                        <Label 
-                            x:Name="CountIDontFollowLabel"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center"
-                            FontAttributes="Bold"
-                            TextColor="Black"/>
-                        <Label 
-                            Text="I Dont follow"
-                            HorizontalOptions="Center"
-                            FontAttributes="Bold"
-                            TextColor="Black"
-                            VerticalOptions="EndAndExpand"/>
-                    </StackLayout>
-                </Frame>
-                <!--#endregion-->
-                <!--#region They dont follow me-->
-                <Frame 
-                    BorderColor="Black"
-                    BackgroundColor="White"
-                    HorizontalOptions="FillAndExpand"
-                    VerticalOptions="FillAndExpand"
-                    Grid.Column="1"
-                    Grid.Row="1">
-                    <StackLayout>
-                        <Label 
-                            x:Name="CountDontFollowMeLabel"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center"
-                            FontAttributes="Bold"
-                            TextColor="Black"/>
-                        <Label 
-                            Text="They dont follow"
-                            FontAttributes="Bold"
-                            TextColor="Black"
-                            HorizontalOptions="Center"
-                            VerticalOptions="EndAndExpand"/>
-                    </StackLayout>
-                </Frame>
-                <!--#endregion-->
-            </StackLayout>
-            <!--#endregion-->
-        </StackLayout>
-        
         <StackLayout>
             <StackLayout 
                 Orientation="Horizontal"
@@ -180,53 +178,59 @@
             </StackLayout>
 
             <ListView 
-                x:Name="FollowersPricesListView" 
-                BackgroundColor="Red"
+                x:Name="FollowersPricesListView"
                 SeparatorVisibility="Default"
                 SeparatorColor="Black">
+                <ListView.Behaviors>
+                    <prism:EventToCommandBehavior 
+                        EventName="ItemTapped"
+                        Command="{Binding NavigatePayView}"/>
+                </ListView.Behaviors>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.ContextActions>
-                                <MenuItem Command="{Binding NavigatePayView}"/>
+                                <MenuItem Text="Edit" />
                             </ViewCell.ContextActions>
-                            <StackLayout
-                                Orientation="Horizontal"
-                                HorizontalOptions="FillAndExpand"
-                                BackgroundColor="White">
-                                <StackLayout
-                                    Orientation="Horizontal">
-                                    <Image 
-                                        Source="{Binding Icon}"
-                                        HorizontalOptions="Center"
-                                        WidthRequest="20"
-                                        HeightRequest="20"/>
-                                    <Label
-                                        VerticalTextAlignment="Center"
-                                        HorizontalOptions="Start"
-                                        TextColor="#4b4b4b"
-                                        FontAttributes="Bold"
-                                        Text="{Binding Count}"/>
-                                </StackLayout>
+                            <ViewCell.View>
                                 <StackLayout
                                     Orientation="Horizontal"
-                                    HorizontalOptions="EndAndExpand">
-                                    <Label
-                                        VerticalTextAlignment="Center"
-                                        TextColor="#464646"
-                                        FontAttributes="Bold"
-                                        Text="{Binding Price}"/>
-                                    <Button
-                                        VerticalOptions="Center"
-                                        CornerRadius="20"
-                                        BorderWidth="5"
-                                        BorderColor="#4691D4"
-                                        FontAttributes="Bold"
-                                        BackgroundColor="White"
-                                        TextColor="#4691D4"
-                                        Text="{Binding Get}"/>
+                                    HorizontalOptions="FillAndExpand"
+                                    BackgroundColor="White">
+                                    <StackLayout
+                                        Orientation="Horizontal">
+                                        <Image
+                                            Source="Follower.png"
+                                            HorizontalOptions="Center"
+                                            WidthRequest="20"
+                                            HeightRequest="20"/>
+                                        <Label
+                                            VerticalTextAlignment="Center"
+                                            HorizontalOptions="Start"
+                                            TextColor="#4B4B4B"
+                                            FontAttributes="Bold"
+                                            Text="{Binding Count}"/>
+                                    </StackLayout>
+                                    <StackLayout
+                                        Orientation="Horizontal"
+                                        HorizontalOptions="EndAndExpand">
+                                        <Label
+                                            VerticalTextAlignment="Center"
+                                            TextColor="#464646"
+                                            FontAttributes="Bold"
+                                            Text="{Binding Price}"/>
+                                        <Button
+                                            VerticalOptions="Center"
+                                            CornerRadius="20"
+                                            BorderWidth="5"
+                                            BorderColor="#4691D4"
+                                            FontAttributes="Bold"
+                                            BackgroundColor="White"
+                                            TextColor="#4691D4"
+                                            Text="Get"/>
+                                    </StackLayout>
                                 </StackLayout>
-                            </StackLayout>
+                            </ViewCell.View>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

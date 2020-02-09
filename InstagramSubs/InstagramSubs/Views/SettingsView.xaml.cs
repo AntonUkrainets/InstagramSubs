@@ -15,6 +15,8 @@ namespace InstagramSubs.Views
         public SettingsView()
         {
             InitializeComponent();
+
+            InitShopsList();
         }
 
         protected override void OnAppearing()
@@ -24,8 +26,6 @@ namespace InstagramSubs.Views
             _userContext = App.Current.Container.Resolve<UserContext>();
 
             InitProfileSettingsData();
-
-            InitShopsList();
         }
 
         private void InitShopsList()

@@ -12,7 +12,7 @@
     <StackLayout>
         <StackLayout
             Orientation="Horizontal"
-            BackgroundColor="#0135E5">
+            BackgroundColor="#2196F3">
             <Image
                 x:Name="ProfileSettingsImage"
                 WidthRequest="45"

@@ -9,25 +9,19 @@ namespace InstagramSubs.Views.Stores
         public FreeStoreView()
         {
             InitializeComponent();
+
+            InitFreeShopItemsList();
         }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
-            InitEarnsListView();
-        }
-
-        private void InitEarnsListView()
+        private void InitFreeShopItemsList()
         {
             EarnsListView.ItemsSource = new List<FreeShop>
             {
                 new FreeShop
                 {
-                    TypeEarnIcon = ImageSource.FromFile("Wach.png"),
+                    TypeEarnIcon = ImageSource.FromFile("Watch.png"),
                     TypeEarn = "Watch & Earn",
                     CountCoins = "+ 5",
-                    CoinsIcon = ImageSource.FromFile("Coins.png")
                 }
             };
         }

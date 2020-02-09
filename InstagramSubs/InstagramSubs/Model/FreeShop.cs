@@ -8,6 +8,5 @@ namespace InstagramSubs.Model
         public string CountCoins { get; set; }
 
         public ImageSource TypeEarnIcon { get; set; }
-        public ImageSource CoinsIcon { get; set; }        
     }
 }

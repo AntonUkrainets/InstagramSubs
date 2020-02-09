@@ -12,12 +12,12 @@ namespace InstagramSubs.ViewModels
 {
     public class FollowersViewModel : ViewModelBase
     {
-        private ICommand _navigatePayView;
+        private INavigationService _navigationService;
 
+        private ICommand _navigatePayView;
         public ICommand NavigatePayView => _navigatePayView
             ?? (_navigatePayView = new Command(OnNavigationPayView));
 
-        private INavigationService _navigationService;
         public FollowersViewModel(INavigationService navigationService)
             : base(navigationService)
         {

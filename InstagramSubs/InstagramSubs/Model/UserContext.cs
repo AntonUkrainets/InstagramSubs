@@ -1,4 +1,5 @@
 ﻿using InstagramApiSharp.Classes.Models;
+using System.Collections.Generic;
 
 namespace InstagramSubs.Model
 {
@@ -6,7 +7,7 @@ namespace InstagramSubs.Model
     {
         public User User { get; }
 
-        public InstaUserShortList Followers { get; set; }
+        public IEnumerable<InstaUserShort> Followers { get; set; }
         public InstaUserShortList UserFollowing { get; set; }
 
         public int CountUsersIDontFollowBack { get; set; }

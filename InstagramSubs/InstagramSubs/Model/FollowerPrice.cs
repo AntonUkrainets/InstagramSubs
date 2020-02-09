@@ -6,8 +6,5 @@ namespace InstagramSubs.Model
     {
         public string Count { get; set; }
         public string Price { get; set; }
-        public string Get { get; set; }
-
-        public ImageSource Icon { get; set; }
     }
 }

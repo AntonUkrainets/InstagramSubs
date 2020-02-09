@@ -1,8 +1,94 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com"
-             prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="InstagramSubs.Views.PayView">
-  
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    x:Class="InstagramSubs.Views.PayView"
+    BackgroundColor="#f7f8fa">
+
+    <!--<ContentPage.Resources>
+        <ResourceDictionary>
+            <x:Array x:Key="CardsName" Type="{x:Type x:String}">
+                <x:String>Card</x:String>
+                <x:String>In-App Purchase</x:String>
+            </x:Array>
+        </ResourceDictionary>
+    </ContentPage.Resources>-->
+
+    <StackLayout BackgroundColor="#2196F3">
+        <StackLayout BackgroundColor="#2196F3">
+        <Label 
+            Text="Order"
+            HorizontalOptions="Center"
+            TextColor="White"/>
+        <Label
+            x:Name="CountFollowersLabel"
+            HorizontalOptions="Center"
+            TextColor="White"
+            FontAttributes="Bold"/>
+        <StackLayout HorizontalOptions="Center">
+            <Image
+                x:Name="FollowersIcon"
+                WidthRequest="20"
+                HeightRequest="20"/>
+            <Label
+                Text="Followers"
+                TextColor="White"
+                FontAttributes="Bold"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Image
+                x:Name="FollowersIcon2"
+                HorizontalOptions="Start"
+                WidthRequest="45"
+                HeightRequest="45"/>
+            <Label
+                x:Name="UserNameLabel"
+                HorizontalOptions="Start"
+                TextColor="White"
+                FontAttributes="Bold"/>
+            <Label
+                x:Name="CountUserFollowers"
+                HorizontalOptions="End"
+                TextColor="White"
+                FontAttributes="Bold"/>
+            <Label
+                Text="Followers"
+                HorizontalOptions="End"
+                TextColor="White"
+                FontAttributes="Bold"/>
+        </StackLayout>
+        </StackLayout>
+        <ListView x:Name="CardsListView">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <StackLayout 
+                                Orientation="Horizontal"
+                                HorizontalOptions="FillAndExpand"
+                                BackgroundColor="White">
+                                <Image
+                                    Source="{Binding Icon}"
+                                    WidthRequest="30"
+                                    HeightRequest="30"
+                                    HorizontalOptions="Start"/>
+                                <Label
+                                    Text="{Binding Name}"
+                                    VerticalTextAlignment="Center"
+                                    HorizontalOptions="Start">
+                                </Label>
+                                <CheckBox
+                                    IsChecked="{Binding CardIsChose}"
+                                    HorizontalOptions="EndAndExpand"/>
+                            </StackLayout>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+    </StackLayout>
+    
 </ContentPage>

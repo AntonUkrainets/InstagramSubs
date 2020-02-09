@@ -1,5 +1,4 @@
-﻿using InstagramApiSharp.Classes.Models;
-using InstagramSubs.API;
+﻿using InstagramSubs.API;
 using InstagramSubs.Model;
 using Prism.Ioc;
 using System.Collections.Generic;
@@ -19,6 +18,9 @@ namespace InstagramSubs.Views
         public FollowersView()
         {
             InitializeComponent();
+
+            InitFollowersPricesList();
+            InitImages();
         }
 
         protected async override void OnAppearing()
@@ -27,7 +29,7 @@ namespace InstagramSubs.Views
 
             _userContext = App.Current.Container.Resolve<UserContext>();
 
-            if (string.IsNullOrEmpty((string)_userContext.User.Name))
+            if (string.IsNullOrEmpty(_userContext.User.Name))
             {
                 _instagramApi = App.Current.Container.Resolve<InstagramAPI>();
 
@@ -35,7 +37,6 @@ namespace InstagramSubs.Views
             }
 
             InitProfileFields();
-            InitFollowersPricesList();
         }
 
         private async Task LoadAsync()
@@ -49,19 +50,21 @@ namespace InstagramSubs.Views
             var userFollowingResult = await _instagramApi.GetUserFollowingAsync();
             _userContext.UserFollowing = userFollowingResult.Value;
 
-            GetCountUsersIDontFollowBack(); 
-            GetCountUsersDontFollowMe();
+            GetUsersCountIDontFollow();
+            GetUsersCountDontFollowMe();
         }
 
-        private void GetCountUsersIDontFollowBack()
+        private void GetUsersCountIDontFollow()
         {
             var followers = _userContext.Followers;
             var userFollowing = _userContext.UserFollowing;
 
+            _userContext.Followers = followers.Except(userFollowing).ToArray();
+
             _userContext.CountUsersIDontFollowBack = followers.Except(userFollowing).Count();
         }
 
-        private void GetCountUsersDontFollowMe()
+        private void GetUsersCountDontFollowMe()
         {
             var followers = _userContext.Followers;
             var userFollowing = _userContext.UserFollowing;
@@ -71,33 +74,29 @@ namespace InstagramSubs.Views
 
         private void InitProfileFields()
         {
-            InitImages();
-
+            ProfileImage.Source = _userContext.User.AvatarUri;
             UserNameLabel.Text = $"{_userContext.User.Name}";
-            CountCurrentFollowersLabel.Text = $"{_userContext.Followers.Count}";
+            CountCurrentFollowersLabel.Text = $"{_userContext.Followers.Count()}";
             CountIDontFollowLabel.Text = $"{_userContext.CountUsersIDontFollowBack}";
             CountDontFollowMeLabel.Text = $"{_userContext.CountUsersDontFollowMe}";
         }
 
         private void InitImages()
         {
-            ProfileImage.Source = _userContext.User.AvatarUri;
             FollowersImage.Source = ImageSource.FromFile("Follower.png");
             CountFollowersImage.Source = ImageSource.FromFile("Follower.png");
         }
 
         private void InitFollowersPricesList()
         {
-            var followerIcon = ImageSource.FromFile("Follower.png");
-
             FollowersPricesListView.ItemsSource = new List<FollowerPrice>
             {
-                new FollowerPrice { Count = "25", Price = "9.99$", Get = "Get", Icon = followerIcon },
-                new FollowerPrice { Count = "3", Price = "0.99$", Get = "Get", Icon = followerIcon },
-                new FollowerPrice { Count = "12", Price = "4.99$", Get = "Get", Icon = followerIcon },
-                new FollowerPrice { Count = "60", Price = "19.99$", Get = "Get", Icon = followerIcon },
-                new FollowerPrice { Count = "180", Price = "49.99$", Get = "Get", Icon = followerIcon },
-                new FollowerPrice { Count = "400", Price = "99.99$", Get = "Get", Icon = followerIcon }
+                new FollowerPrice { Count = "25", Price = "9.99$" },
+                new FollowerPrice { Count = "3", Price = "0.99$" },
+                new FollowerPrice { Count = "12", Price = "4.99$" },
+                new FollowerPrice { Count = "60", Price = "19.99$" },
+                new FollowerPrice { Count = "180", Price = "49.99$" },
+                new FollowerPrice { Count = "400", Price = "99.99$" }
             };
         }
     }
