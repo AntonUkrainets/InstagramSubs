@@ -37,12 +37,6 @@ namespace InstagramSubs.LocalAPI.Implements
             return _localApi;
         }
 
-        //public void InitUsersList()
-        //{
-        //    var user = new User { Name = "Genry_Layout", Password = "Genry.Layout" };
-        //    _usersDataBase.SaveUserAsync(user);
-        //}
-
         public async Task<IEnumerable<User>> GetUsersDataAsync()
         {
             return await _usersDatabase.GetUsersAsync();
@@ -60,7 +54,7 @@ namespace InstagramSubs.LocalAPI.Implements
             return await _usersDatabase.GetUserByNameAsync(name);
         }
 
-        public async Task SaveSessionStateAsync(int userId, byte[] state)
+        public async Task SaveSessionStateAsync(int userId, string state)
         {
             var user = await _usersDatabase.GetUserAsync(userId);
 

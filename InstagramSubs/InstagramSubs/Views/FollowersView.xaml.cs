@@ -1,7 +1,9 @@
-﻿using InstagramSubs.API;
+﻿using InstagramApiSharp.Classes.Models;
+using InstagramSubs.API;
 using InstagramSubs.Model;
 using Prism.Ioc;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -14,8 +16,6 @@ namespace InstagramSubs.Views
         private InstagramAPI _instagramApi;
         private UserContext _userContext;
 
-        private const string _stateFile = "state.bin";
-
         public FollowersView()
         {
             InitializeComponent();
@@ -23,7 +23,7 @@ namespace InstagramSubs.Views
 
         protected async override void OnAppearing()
         {
-            base.OnAppearing();            
+            base.OnAppearing();
 
             _userContext = App.Current.Container.Resolve<UserContext>();
 
@@ -44,7 +44,29 @@ namespace InstagramSubs.Views
             _userContext.User.Name = getCurrentUserResult.Value.UserName;
 
             var getCurrentUserFollowersResult = await _instagramApi.GetCurrentUserFollowersAsync();
-            _userContext.FollowersNumber = getCurrentUserFollowersResult.Value.Count;
+            _userContext.Followers = getCurrentUserFollowersResult.Value;
+
+            var userFollowingResult = await _instagramApi.GetUserFollowingAsync();
+            _userContext.UserFollowing = userFollowingResult.Value;
+
+            GetCountUsersIDontFollowBack(); 
+            GetCountUsersDontFollowMe();
+        }
+
+        private void GetCountUsersIDontFollowBack()
+        {
+            var followers = _userContext.Followers;
+            var userFollowing = _userContext.UserFollowing;
+
+            _userContext.CountUsersIDontFollowBack = followers.Except(userFollowing).Count();
+        }
+
+        private void GetCountUsersDontFollowMe()
+        {
+            var followers = _userContext.Followers;
+            var userFollowing = _userContext.UserFollowing;
+
+            _userContext.CountUsersDontFollowMe = userFollowing.Except(followers).Count();
         }
 
         private void InitProfileFields()
@@ -52,7 +74,9 @@ namespace InstagramSubs.Views
             InitImages();
 
             UserNameLabel.Text = $"{_userContext.User.Name}";
-            CountCurrentFollowersLabel.Text = $"{_userContext.FollowersNumber}";
+            CountCurrentFollowersLabel.Text = $"{_userContext.Followers.Count}";
+            CountIDontFollowLabel.Text = $"{_userContext.CountUsersIDontFollowBack}";
+            CountDontFollowMeLabel.Text = $"{_userContext.CountUsersDontFollowMe}";
         }
 
         private void InitImages()

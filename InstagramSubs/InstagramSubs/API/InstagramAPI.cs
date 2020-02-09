@@ -6,7 +6,6 @@ using InstagramApiSharp.Classes.Models;
 using InstagramApiSharp.Logger;
 using InstagramSubs.Data;
 using InstagramSubs.Repository.Interfaces;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace InstagramSubs.API
@@ -39,24 +38,12 @@ namespace InstagramSubs.API
             if (user?.InstagramState == null)
                 return;
 
-            using (var ms = new MemoryStream(user.InstagramState))
-            {
-                await _instaApi.LoadStateDataFromStreamAsync(ms);
-            }
+            await _instaApi.LoadStateDataFromStringAsync(user.InstagramState);
         }
 
         private async Task SaveSessionStateAsync()
         {
-            var stateStream = _instaApi.GetStateDataAsStream();
-
-            byte[] state = null;
-
-            using (var ms = new MemoryStream())
-            {
-                stateStream.CopyTo(ms);
-
-                state = ms.ToArray();
-            }
+            var stateData = _instaApi.GetStateDataAsString();
 
             var user = await _repository.GetUserByNameAsync(_userName);
 
@@ -74,15 +61,15 @@ namespace InstagramSubs.API
                 userId = user.Id;
             }
 
-            await _repository.SaveSessionStateAsync(userId, state);
+            await _repository.SaveSessionStateAsync(userId, stateData);
         }
 
         private IInstaApi CreateInstaInstance(UserSessionData userSessionData)
         {
             return InstaApiBuilder.CreateBuilder()
                 .SetUser(userSessionData)
-                .UseLogger(new DebugLogger(LogLevel.All)) //Проходить все уровни аутентификаций
-                .SetRequestDelay(RequestDelay.FromSeconds(min: 0, max: 1)) //Промежуток очереди запросов
+                .UseLogger(new DebugLogger(LogLevel.All))
+                .SetRequestDelay(RequestDelay.FromSeconds(min: 0, max: 1))
                 .Build();
         }
 
@@ -119,6 +106,14 @@ namespace InstagramSubs.API
                 await LoginAsync();
 
             return await _instaApi.UserProcessor.GetCurrentUserFollowersAsync(PaginationParameters.Empty);
+        }
+
+        public async Task<IResult<InstaUserShortList>> GetUserFollowingAsync()
+        {
+            if (!_instaApi.IsUserAuthenticated)
+                await LoginAsync();
+
+            return await _instaApi.UserProcessor.GetUserFollowingAsync(_userName, PaginationParameters.Empty);
         }
     }
 }

@@ -6,45 +6,49 @@
              x:Class="InstagramSubs.Views.Stores.BuyStoreView"
              Title="Buy Coins"
              Shell.NavBarIsVisible="True"
-             BackgroundColor="#F7F8FA">
+             BackgroundColor="#2196F3">
 
     <ListView 
         x:Name="FollowersPricesListView" 
-        SeparatorVisibility="Default"
-        SeparatorColor="Black">
+        SeparatorVisibility="None"
+        Margin="0, 5, 0, 5">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
-                    <StackLayout 
-                        Orientation="Horizontal"
+                    <Frame
                         HorizontalOptions="FillAndExpand"
                         BackgroundColor="White"
-                        Padding="10">
-                        <StackLayout
+                        CornerRadius="10"
+                        Margin="10, 5, 10, 5"
+                        Padding="10, 5, 10, 5">
+                        <StackLayout 
                             Orientation="Horizontal">
-                            <Image
-                                Source="{Binding Icon}"
-                                HorizontalOptions="Center"
-                                WidthRequest="20"
-                                HeightRequest="20"/>
-                            <Label
-                                VerticalTextAlignment="Center"
-                                HorizontalOptions="Start"
-                                TextColor="#EAA233"
-                                FontAttributes="Bold"
-                                Text="{Binding Count}"/>
+                            <StackLayout
+                                Orientation="Horizontal">
+                                <Image
+                                    Source="{Binding Icon}"
+                                    HorizontalOptions="Center"
+                                    WidthRequest="20"
+                                    HeightRequest="20"/>
+                                <Label
+                                    VerticalTextAlignment="Center"
+                                    HorizontalOptions="Start"
+                                    TextColor="#EAA233"
+                                    FontAttributes="Bold"
+                                    Text="{Binding Count}"/>
+                            </StackLayout>
+                            <StackLayout
+                                Orientation="Horizontal"
+                                HorizontalOptions="EndAndExpand">
+                                <Label
+                                    VerticalTextAlignment="Center"
+                                    HorizontalOptions="EndAndExpand"
+                                    TextColor="#464646"
+                                    FontAttributes="Bold"
+                                    Text="{Binding Price}"/>
+                            </StackLayout>
                         </StackLayout>
-                        <StackLayout
-                            Orientation="Horizontal"
-                            HorizontalOptions="EndAndExpand">
-                            <Label
-                                VerticalTextAlignment="Center"
-                                HorizontalOptions="EndAndExpand"
-                                TextColor="#464646"
-                                FontAttributes="Bold"
-                                Text="{Binding Price}"/>
-                        </StackLayout>
-                    </StackLayout>
+                    </Frame>
                 </ViewCell>
             </DataTemplate>
         </ListView.ItemTemplate>

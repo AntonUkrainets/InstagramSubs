@@ -22,7 +22,6 @@ namespace InstagramSubs.Repository.Implements
             if(_repository == null)
             {
                 _repository = new UserRepository(LocalApi.GetInstance());
-                //_localApi.InitUsersList();
             }
 
             return _repository;
@@ -43,7 +42,7 @@ namespace InstagramSubs.Repository.Implements
             return _localApi.AddAsync(user);
         }
 
-        public Task SaveSessionStateAsync(int userId, byte[] state)
+        public Task SaveSessionStateAsync(int userId, string state)
         {
             return _localApi.SaveSessionStateAsync(userId, state);
         }

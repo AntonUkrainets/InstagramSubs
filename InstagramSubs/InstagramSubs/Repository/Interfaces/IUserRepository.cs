@@ -9,6 +9,6 @@ namespace InstagramSubs.Repository.Interfaces
         Task<IEnumerable<User>> GetAllAsync();
         Task<int> AddUserAsync(User user);
         Task<User> GetUserByNameAsync(string name);
-        Task SaveSessionStateAsync(int userId, byte[] state);
+        Task SaveSessionStateAsync(int userId, string state);
     }
 }

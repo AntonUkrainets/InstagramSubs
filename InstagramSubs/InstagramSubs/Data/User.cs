@@ -16,6 +16,6 @@ namespace InstagramSubs.Data
         public int NewFollowers { get; set; }
         public int LostFollowers { get; set; }
 
-        public byte[] InstagramState { get; set; }
+        public string InstagramState { get; set; }
     }
 }

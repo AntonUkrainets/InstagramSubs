@@ -8,43 +8,13 @@
     x:Class="InstagramSubs.Views.StoreView"
     Shell.NavBarIsVisible="True">
 
-    <!--<FlyoutItem
-        Title="T1"
-        FlyoutDisplayOptions="AsMultipleItems"
-    >-->
-        <Tab Title="Domestic"
-             Icon="paw.png">
-            <!--<ShellContent
-                Route="cats"
-                Title="Cats"
-                Icon="cat.png"
-                ContentTemplate="{DataTemplate views:CatsPage}" />
-            <ShellContent
-                Route="dogs"
-                Style="{StaticResource DomesticShell}"
-                Title="Dogs"
-                Icon="dog.png"
-                ContentTemplate="{DataTemplate views:DogsPage}" />-->
-            <ShellContent Title="T2">
-                <stores:BuyStoreView Title="Buy Coins"/>
-            </ShellContent>
-            <ShellContent Title="T3">
-                <stores:FreeStoreView Title="Free Coins"/>
-            </ShellContent>
-        </Tab>
-    <!--</FlyoutItem>-->
-    
-    <!--<TabBar>
-        <Tab Title="Buy Coins">
-            <ShellContent>
-                <stores:BuyStoreView Title="Buy Coins"/>
-            </ShellContent>
-        </Tab>
-        <Tab Title="Free Coins">
-            <ShellContent>
-                <stores:FreeStoreView Title="Free Coins"/>
-            </ShellContent>
-        </Tab>
-    </TabBar>-->
-    
+    <Tab>
+        <ShellContent Title="Buy Coins">
+            <stores:BuyStoreView/>
+        </ShellContent>
+        <ShellContent Title="Free Coins">
+            <stores:FreeStoreView/>
+        </ShellContent>
+    </Tab>
+
 </Shell>
