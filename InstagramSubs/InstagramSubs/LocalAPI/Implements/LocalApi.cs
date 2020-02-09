@@ -1,51 +1,72 @@
 ﻿using InstagramSubs.DataBaseAPI;
 using InstagramSubs.LocalAPI.Interfaces;
-using InstagramSubs.Model;
+using InstagramSubs.Data;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace InstagramSubs.LocalAPI.Implements
 {
-    public class LocalApi : ILocalApi<InstaUser>
+    public class LocalApi : ILocalApi
     {
-        private static ILocalApi<InstaUser> _localApi;
+        private static ILocalApi _localApi;
 
-        private static UsersDataBase _usersDataBase;
-        public static UsersDataBase UsersDataBase
+        private static UsersDatabase _usersDatabase;
+        public static UsersDatabase UsersDataBase
         {
             get
             {
-                if (_usersDataBase == null)
-                    _usersDataBase = new UsersDataBase();
+                if (_usersDatabase == null)
+                {
+                    _usersDatabase = new UsersDatabase();
+                    _usersDatabase.Connect();
+                }
 
-                return _usersDataBase;
+                return _usersDatabase;
             }
         }
 
-        public static ILocalApi<InstaUser> GetInstance()
+        public static ILocalApi GetInstance()
         {
             if (_localApi == null)
             {
                 _localApi = new LocalApi();
-                _usersDataBase = new UsersDataBase();
+                _usersDatabase = new UsersDatabase();
+                _usersDatabase.Connect();
             }
 
             return _localApi;
         }
 
-        public void InitUsersList()
+        //public void InitUsersList()
+        //{
+        //    var user = new User { Name = "Genry_Layout", Password = "Genry.Layout" };
+        //    _usersDataBase.SaveUserAsync(user);
+        //}
+
+        public async Task<IEnumerable<User>> GetUsersDataAsync()
         {
-            var user = new InstaUser { Name = "Bobby_Layout", Password = "Bobby.Layout" };
-            _usersDataBase.SaveUserAsync(user);
+            return await _usersDatabase.GetUsersAsync();
         }
 
-        public IEnumerable<InstaUser> GetUsersData()
+        public Task<int> AddAsync(User user)
         {
-            return _usersDataBase.GetUsersAsync().Result;
+            return _usersDatabase.SaveUserAsync(user);
         }
 
-        public void Add(InstaUser user)
+        public async Task<User> GetUserByNameAsync(string name)
         {
-            _usersDataBase.SaveUserAsync(user);
+            var tt = await _usersDatabase.GetUsersAsync();
+
+            return await _usersDatabase.GetUserByNameAsync(name);
+        }
+
+        public async Task SaveSessionStateAsync(int userId, byte[] state)
+        {
+            var user = await _usersDatabase.GetUserAsync(userId);
+
+            user.InstagramState = state;
+
+            await _usersDatabase.SaveUserAsync(user);
         }
     }
 }

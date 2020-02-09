@@ -34,7 +34,7 @@ namespace InstagramSubs
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterInstance<InstagramAPI>(
-                new InstagramAPI("Bobby_Layout", "Bobby.Layout")
+                new InstagramAPI("Genry_Layout", "Genry.Layout")
                 );
 
             containerRegistry.RegisterSingleton<UserContext>();

@@ -1,8 +1,8 @@
 ﻿using SQLite;
 
-namespace InstagramSubs.Model
+namespace InstagramSubs.Data
 {
-    public class InstaUser
+    public class User
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -15,5 +15,7 @@ namespace InstagramSubs.Model
         public int CurrentFollowers { get; set; }
         public int NewFollowers { get; set; }
         public int LostFollowers { get; set; }
+
+        public byte[] InstagramState { get; set; }
     }
 }

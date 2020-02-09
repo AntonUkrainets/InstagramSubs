@@ -1,4 +1,4 @@
-﻿using InstagramSubs.Model;
+﻿using InstagramSubs.Data;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -7,17 +7,16 @@ using System.Threading.Tasks;
 
 namespace InstagramSubs.DataBaseAPI
 {
-    public class UsersDataBase
+    public class UsersDatabase
     {
-        private readonly SQLiteAsyncConnection _database;
-        private readonly string _databasePath;
+        private SQLiteAsyncConnection _database;
 
-        public UsersDataBase()
+        public void Connect()
         {
-            _databasePath = GetDatabasePath();
+            var databasePath = GetDatabasePath();
 
-            _database = new SQLiteAsyncConnection(_databasePath);
-            _database.CreateTableAsync<InstaUser>().Wait();
+            _database = new SQLiteAsyncConnection(databasePath);
+            _database.CreateTableAsync<User>().Wait();
         }
 
         private static string GetDatabasePath()
@@ -28,22 +27,32 @@ namespace InstagramSubs.DataBaseAPI
             return path;
         }
 
-        public Task<List<InstaUser>> GetUsersAsync()
+        public Task<List<User>> GetUsersAsync()
         {
-            return _database.Table<InstaUser>().ToListAsync();
+            return _database.Table<User>().ToListAsync();
         }
 
-        public Task<InstaUser> GetUserAsync(int id)
+        public Task<User> GetUserAsync(int id)
         {
             var user = _database
-                    .Table<InstaUser>()
+                    .Table<User>()
                     .Where(u => u.Id == id)
                     .FirstOrDefaultAsync();
 
             return user;
         }
 
-        public Task<int> SaveUserAsync(InstaUser user)
+        public Task<User> GetUserByNameAsync(string name)
+        {
+            var user = _database
+                    .Table<User>()
+                    .Where(u => u.Name == name)
+                    .FirstOrDefaultAsync();
+
+            return user;
+        }
+
+        public Task<int> SaveUserAsync(User user)
         {
             if (user.Id != 0)
                 return _database.UpdateAsync(user);
@@ -51,7 +60,7 @@ namespace InstagramSubs.DataBaseAPI
                 return _database.InsertAsync(user);
         }
 
-        public Task<int> RemoveUserAsync(InstaUser user)
+        public Task<int> RemoveUserAsync(User user)
         {
             return _database.DeleteAsync(user);
         }

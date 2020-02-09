@@ -12,8 +12,9 @@ namespace InstagramSubs.Views
     public partial class FollowersView : ContentPage
     {
         private InstagramAPI _instagramApi;
-
         private UserContext _userContext;
+
+        private const string _stateFile = "state.bin";
 
         public FollowersView()
         {
@@ -22,15 +23,15 @@ namespace InstagramSubs.Views
 
         protected async override void OnAppearing()
         {
-            base.OnAppearing();
+            base.OnAppearing();            
 
             _userContext = App.Current.Container.Resolve<UserContext>();
 
-            if (string.IsNullOrEmpty(_userContext.User.Name))
+            if (string.IsNullOrEmpty((string)_userContext.User.Name))
             {
                 _instagramApi = App.Current.Container.Resolve<InstagramAPI>();
 
-                //await LoadAsync();
+                await LoadAsync();
             }
 
             InitProfileFields();
