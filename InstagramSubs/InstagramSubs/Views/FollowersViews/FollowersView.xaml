@@ -7,9 +7,9 @@
     xmlns:viewmodels="clr-namespace:InstagramSubs.ViewModels"
     prism:ViewModelLocator.AutowireViewModel="True"
     x:Class="InstagramSubs.Views.FollowersView"
-    BackgroundColor="#2196F3"
-    Title="Followers">
+    BackgroundColor="#2196F3">
 
+    <RefreshView>
     <StackLayout>
         <StackLayout 
             BackgroundColor="#2196F3">
@@ -177,16 +177,194 @@
                     TextColor="White"/>
             </StackLayout>
 
-            <ListView 
-                x:Name="FollowersPricesListView"
-                SeparatorVisibility="Default"
-                SeparatorColor="Black">
-                <ListView.Behaviors>
-                    <prism:EventToCommandBehavior 
-                        EventName="ItemTapped"
-                        Command="{Binding NavigatePayView}"/>
-                </ListView.Behaviors>
-                <ListView.ItemTemplate>
+            <!--#region Price 1--><!--
+                <StackLayout
+                    Orientation="Horizontal"
+                    HorizontalOptions="FillAndExpand"
+                    BackgroundColor="White">
+                    <StackLayout
+                        Orientation="Horizontal">
+                        <Image
+                            Source="Follower.png"
+                            HorizontalOptions="Center"
+                            WidthRequest="20"
+                            HeightRequest="20"/>
+                        <Label
+                            x:Name="Price1Label"
+                            VerticalTextAlignment="Center"
+                            HorizontalOptions="Start"
+                            TextColor="#4B4B4B"
+                            FontAttributes="Bold"
+                            Text="25"/>
+                    </StackLayout>
+                    <StackLayout
+                        Orientation="Horizontal"
+                        HorizontalOptions="EndAndExpand">
+                        <Label
+                            VerticalTextAlignment="Center"
+                            TextColor="#464646"
+                            FontAttributes="Bold"
+                            Text="9.99$"/>
+                        <Button
+                            VerticalOptions="Center"
+                            CornerRadius="20"
+                            BorderWidth="5"
+                            BorderColor="#4691D4"
+                            FontAttributes="Bold"
+                            BackgroundColor="White"
+                            TextColor="#4691D4"
+                            Command="{Binding GoToPayView}"
+                            CommandParameter="{Binding Source={x:Reference Price1Label}, Path=Text}"
+                            Text="Get"/>
+                    </StackLayout>
+                </StackLayout>
+            --><!--#endregion-->
+
+            <!--#region Price 2--><!--
+                <StackLayout
+                    Orientation="Horizontal"
+                    HorizontalOptions="FillAndExpand"
+                    BackgroundColor="White">
+                    <StackLayout
+                        Orientation="Horizontal">
+                        <Image
+                            Source="Follower.png"
+                            HorizontalOptions="Center"
+                            WidthRequest="20"
+                            HeightRequest="20"/>
+                        <Label
+                            x:Name="Price2Label"
+                            VerticalTextAlignment="Center"
+                            HorizontalOptions="Start"
+                            TextColor="#4B4B4B"
+                            FontAttributes="Bold"
+                            Text="3"/>
+                    </StackLayout>
+                    <StackLayout
+                        Orientation="Horizontal"
+                        HorizontalOptions="EndAndExpand">
+                        <Label
+                            VerticalTextAlignment="Center"
+                            TextColor="#464646"
+                            FontAttributes="Bold"
+                            Text="0.99$"/>
+                        <Button
+                            VerticalOptions="Center"
+                            CornerRadius="20"
+                            BorderWidth="5"
+                            BorderColor="#4691D4"
+                            FontAttributes="Bold"
+                            BackgroundColor="White"
+                            TextColor="#4691D4"
+                            Command="{Binding GoToPayView}"
+                            CommandParameter="{Binding Source={x:Reference Price2Label}, Path=Text}"
+                            Text="Get"/>
+                    </StackLayout>
+                </StackLayout>
+            --><!--#endregion-->
+
+            <!--#region Price 3--><!--
+                <StackLayout
+                    Orientation="Horizontal"
+                    HorizontalOptions="FillAndExpand"
+                    BackgroundColor="White"
+                    Margin="0">
+                    <StackLayout
+                        Orientation="Horizontal">
+                        <Image
+                            Source="Follower.png"
+                            HorizontalOptions="Center"
+                            WidthRequest="20"
+                            HeightRequest="20"/>
+                        <Label
+                            x:Name="Price3Label"
+                            VerticalTextAlignment="Center"
+                            HorizontalOptions="Start"
+                            TextColor="#4B4B4B"
+                            FontAttributes="Bold"
+                            Text="12"/>
+                    </StackLayout>
+                    <StackLayout
+                        Orientation="Horizontal"
+                        HorizontalOptions="EndAndExpand">
+                        <Label
+                            VerticalTextAlignment="Center"
+                            TextColor="#464646"
+                            FontAttributes="Bold"
+                            Text="4.99$"/>
+                        <Button
+                            VerticalOptions="Center"
+                            CornerRadius="20"
+                            BorderWidth="5"
+                            BorderColor="#4691D4"
+                            FontAttributes="Bold"
+                            BackgroundColor="White"
+                            TextColor="#4691D4"
+                            Command="{Binding GoToPayView}"
+                            CommandParameter="{Binding Source={x:Reference Price3Label}, Path=Text}"
+                            Text="Get"/>
+                    </StackLayout>
+                </StackLayout>
+            --><!--#endregion-->
+
+            <!--#region Price 4--><!--
+                <StackLayout
+                    Orientation="Horizontal"
+                    HorizontalOptions="FillAndExpand"
+                    BackgroundColor="White"
+                    Margin="0">
+                    <StackLayout
+                        Orientation="Horizontal">
+                        <Image
+                            Source="Follower.png"
+                            HorizontalOptions="Center"
+                            WidthRequest="20"
+                            HeightRequest="20"/>
+                        <Label
+                            x:Name="Price4Label"
+                            VerticalTextAlignment="Center"
+                            HorizontalOptions="Start"
+                            TextColor="#4B4B4B"
+                            FontAttributes="Bold"
+                            Text="60"/>
+                    </StackLayout>
+                    <StackLayout
+                        Orientation="Horizontal"
+                        HorizontalOptions="EndAndExpand">
+                        <Label
+                            VerticalTextAlignment="Center"
+                            TextColor="#464646"
+                            FontAttributes="Bold"
+                            Text="19.99$"/>
+                        <Button
+                            VerticalOptions="Center"
+                            CornerRadius="20"
+                            BorderWidth="5"
+                            BorderColor="#4691D4"
+                            FontAttributes="Bold"
+                            BackgroundColor="White"
+                            TextColor="#4691D4"
+                            Command="{Binding GoToPayView}"
+                            CommandParameter="{Binding Source={x:Reference Price4Label}, Path=Text}"
+                            Text="Get"/>
+                    </StackLayout>
+                </StackLayout>
+            --><!--#endregion-->
+            
+            
+                <!--#endregion-->
+
+                <ListView
+                    x:Name="FollowersPricesListView"
+                    SeparatorVisibility="Default"
+                    SeparatorColor="Black">
+                    <ListView.Behaviors>
+                        <prism:EventToCommandBehavior 
+                            EventName="ItemTapped"
+                            Command="{Binding NavigatePayView}"
+                            CommandParameter="{Binding Source={x:Reference FollowersPricesListView}, Path=SelectedItem}"/>
+                    </ListView.Behaviors>
+                    <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.ContextActions>
@@ -209,7 +387,7 @@
                                             HorizontalOptions="Start"
                                             TextColor="#4B4B4B"
                                             FontAttributes="Bold"
-                                            Text="{Binding Count}"/>
+                                            Text="3"/>
                                     </StackLayout>
                                     <StackLayout
                                         Orientation="Horizontal"
@@ -239,4 +417,5 @@
         </StackLayout>
 
     </StackLayout>
+    </RefreshView>
 </ContentPage>

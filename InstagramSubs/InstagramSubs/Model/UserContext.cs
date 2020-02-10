@@ -7,7 +7,7 @@ namespace InstagramSubs.Model
     {
         public User User { get; }
 
-        public IEnumerable<InstaUserShort> Followers { get; set; }
+        public IReadOnlyCollection<InstaUserShort> Followers { get; set; }
         public InstaUserShortList UserFollowing { get; set; }
 
         public int CountUsersIDontFollowBack { get; set; }

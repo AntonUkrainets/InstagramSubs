@@ -76,7 +76,7 @@ namespace InstagramSubs.Views
         {
             ProfileImage.Source = _userContext.User.AvatarUri;
             UserNameLabel.Text = $"{_userContext.User.Name}";
-            CountCurrentFollowersLabel.Text = $"{_userContext.Followers.Count()}";
+            CountCurrentFollowersLabel.Text = $"{_userContext.Followers.Count}";
             CountIDontFollowLabel.Text = $"{_userContext.CountUsersIDontFollowBack}";
             CountDontFollowMeLabel.Text = $"{_userContext.CountUsersDontFollowMe}";
         }
