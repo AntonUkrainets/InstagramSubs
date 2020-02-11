@@ -4,7 +4,6 @@ using Xamarin.Forms;
 using Prism.Ioc;
 using InstagramSubs.API;
 using System.Threading.Tasks;
-using System;
 using Prism.Navigation;
 
 namespace InstagramSubs.Views
@@ -25,9 +24,9 @@ namespace InstagramSubs.Views
 
         public void OnNavigatedTo(INavigationParameters parameters)
         {
-            var countFollowers = parameters.GetValue<object>("countFollowers");
+            var price = parameters.GetValue<Price>("countFollowers");
 
-            //CountFollowersLabel.Text = $"{countFollowers}";
+            CountFollowersLabel.Text = $"{price.CountFollowers}";
         }
 
         protected async override void OnAppearing()
@@ -73,7 +72,5 @@ namespace InstagramSubs.Views
                 }
             };
         }
-
-        
     }
 }

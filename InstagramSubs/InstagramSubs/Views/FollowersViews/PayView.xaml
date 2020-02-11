@@ -7,15 +7,6 @@
     x:Class="InstagramSubs.Views.PayView"
     BackgroundColor="#f7f8fa">
 
-    <!--<ContentPage.Resources>
-        <ResourceDictionary>
-            <x:Array x:Key="CardsName" Type="{x:Type x:String}">
-                <x:String>Card</x:String>
-                <x:String>In-App Purchase</x:String>
-            </x:Array>
-        </ResourceDictionary>
-    </ContentPage.Resources>-->
-
     <StackLayout BackgroundColor="#2196F3">
         <StackLayout BackgroundColor="#2196F3">
         <Label 

@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstagramSubs", "InstagramSubs\InstagramSubs\InstagramSubs.csproj", "{BA86B253-EE23-4959-B2A9-1C69ADD12477}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InstagramSubs", "InstagramSubs\InstagramSubs\InstagramSubs.csproj", "{BA86B253-EE23-4959-B2A9-1C69ADD12477}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstagramSubs.Android", "InstagramSubs\InstagramSubs.Android\InstagramSubs.Android.csproj", "{40DC55AD-65A8-49D3-B0C2-42CF5673743F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstagramSubs.iOS", "InstagramSubs\InstagramSubs.iOS\InstagramSubs.iOS.csproj", "{A42D0ECB-5235-4D40-AFD9-C71A1C382725}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstagramSubsServer", "InstagramSubsServer\InstagramSubsServer.csproj", "{E41C3F35-5707-478C-BAFF-0139333323B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +107,30 @@ Global
 		{A42D0ECB-5235-4D40-AFD9-C71A1C382725}.Release|iPhone.Build.0 = Release|iPhone
 		{A42D0ECB-5235-4D40-AFD9-C71A1C382725}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{A42D0ECB-5235-4D40-AFD9-C71A1C382725}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{E41C3F35-5707-478C-BAFF-0139333323B1}.Ad-Hoc|Any CPU.ActiveCfg = Debug|Any CPU
+		{E41C3F35-5707-478C-BAFF-0139333323B1}.Ad-Hoc|Any CPU.Build.0 = Debug|Any CPU
+		{E41C3F35-5707-478C-BAFF-0139333323B1}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
+		{E41C3F35-5707-478C-BAFF-0139333323B1}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
+		{E41C3F35-5707-478C-BAFF-0139333323B1}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{E41C3F35-5707-478C-BAFF-0139333323B1}.Ad-Hoc|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{E41C3F35-5707-478C-BAFF-0139333323B1}.AppStore|Any CPU.ActiveCfg = Debug|Any CPU
+		{E41C3F35-5707-478C-BAFF-0139333323B1}.AppStore|Any CPU.Build.0 = Debug|Any CPU
+		{E41C3F35-5707-478C-BAFF-0139333323B1}.AppStore|iPhone.ActiveCfg = Debug|Any CPU
+		{E41C3F35-5707-478C-BAFF-0139333323B1}.AppStore|iPhone.Build.0 = Debug|Any CPU
+		{E41C3F35-5707-478C-BAFF-0139333323B1}.AppStore|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{E41C3F35-5707-478C-BAFF-0139333323B1}.AppStore|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{E41C3F35-5707-478C-BAFF-0139333323B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E41C3F35-5707-478C-BAFF-0139333323B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E41C3F35-5707-478C-BAFF-0139333323B1}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{E41C3F35-5707-478C-BAFF-0139333323B1}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{E41C3F35-5707-478C-BAFF-0139333323B1}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{E41C3F35-5707-478C-BAFF-0139333323B1}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{E41C3F35-5707-478C-BAFF-0139333323B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E41C3F35-5707-478C-BAFF-0139333323B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E41C3F35-5707-478C-BAFF-0139333323B1}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{E41C3F35-5707-478C-BAFF-0139333323B1}.Release|iPhone.Build.0 = Release|Any CPU
+		{E41C3F35-5707-478C-BAFF-0139333323B1}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{E41C3F35-5707-478C-BAFF-0139333323B1}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

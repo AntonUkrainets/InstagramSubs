@@ -3,8 +3,6 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="http://prismlibrary.com"
-    xmlns:instagramsubs="clr-namespace:InstagramSubs"
-    xmlns:viewmodels="clr-namespace:InstagramSubs.ViewModels"
     prism:ViewModelLocator.AutowireViewModel="True"
     x:Class="InstagramSubs.Views.FollowersView"
     BackgroundColor="#2196F3">
@@ -30,19 +28,21 @@
                 Margin="0, 0, 0, 10"
                 CornerRadius="10">
                 <StackLayout
-                Orientation="Horizontal">
+                    Orientation="Horizontal">
                     <Image 
-                    x:Name="CountFollowersImage"
-                    WidthRequest="20"
-                    HeightRequest="20"/>
+                        x:Name="CountFollowersImage"
+                        Source="Follower.png"
+                        WidthRequest="20"
+                        HeightRequest="20"/>
                     <Label
-                    x:Name="CountCurrentFollowersLabel"
-                    TextColor="#5696D6"
-                    HorizontalOptions="Center"/>
+                        x:Name="CountCurrentFollowersLabel"
+                        TextColor="#5696D6"
+                        HorizontalOptions="Center"/>
                 </StackLayout>
             </Frame>
         </StackLayout>
 
+        <!--#region Followers-->
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -54,7 +54,7 @@
             </Grid.RowDefinitions>
 
             <!--#region New Subscribers-->
-            <Frame 
+            <Frame
                 Grid.Row="0"
                 Grid.Column="0"
                 BorderColor="Black"
@@ -80,7 +80,7 @@
             <!--#endregion-->
 
             <!--#region Lost Subscribers-->
-            <Frame 
+            <Frame
                 Grid.Row="0"
                 Grid.Column="1"
                 BorderColor="Black"
@@ -159,216 +159,41 @@
             </Frame>
             <!--#endregion-->
         </Grid>
+        <!--#endregion-->
 
         <StackLayout>
-            <StackLayout 
+            <StackLayout
                 Orientation="Horizontal"
                 HorizontalOptions="Center"
                 Margin="10, 0, 10, 0">
-                <Image 
+                <Image
                     x:Name="FollowersImage"
+                    Source="Follower.png"
                     HorizontalOptions="Center"
                     WidthRequest="20"
                     HeightRequest="20"/>
-                <Label 
+                <Label
                     x:Name="FollowersLabel"
                     Text="Followers"
                     FontAttributes="Bold"
                     TextColor="White"/>
             </StackLayout>
 
-            <!--#region Price 1--><!--
-                <StackLayout
-                    Orientation="Horizontal"
-                    HorizontalOptions="FillAndExpand"
-                    BackgroundColor="White">
-                    <StackLayout
-                        Orientation="Horizontal">
-                        <Image
-                            Source="Follower.png"
-                            HorizontalOptions="Center"
-                            WidthRequest="20"
-                            HeightRequest="20"/>
-                        <Label
-                            x:Name="Price1Label"
-                            VerticalTextAlignment="Center"
-                            HorizontalOptions="Start"
-                            TextColor="#4B4B4B"
-                            FontAttributes="Bold"
-                            Text="25"/>
-                    </StackLayout>
-                    <StackLayout
-                        Orientation="Horizontal"
-                        HorizontalOptions="EndAndExpand">
-                        <Label
-                            VerticalTextAlignment="Center"
-                            TextColor="#464646"
-                            FontAttributes="Bold"
-                            Text="9.99$"/>
-                        <Button
-                            VerticalOptions="Center"
-                            CornerRadius="20"
-                            BorderWidth="5"
-                            BorderColor="#4691D4"
-                            FontAttributes="Bold"
-                            BackgroundColor="White"
-                            TextColor="#4691D4"
-                            Command="{Binding GoToPayView}"
-                            CommandParameter="{Binding Source={x:Reference Price1Label}, Path=Text}"
-                            Text="Get"/>
-                    </StackLayout>
-                </StackLayout>
-            --><!--#endregion-->
-
-            <!--#region Price 2--><!--
-                <StackLayout
-                    Orientation="Horizontal"
-                    HorizontalOptions="FillAndExpand"
-                    BackgroundColor="White">
-                    <StackLayout
-                        Orientation="Horizontal">
-                        <Image
-                            Source="Follower.png"
-                            HorizontalOptions="Center"
-                            WidthRequest="20"
-                            HeightRequest="20"/>
-                        <Label
-                            x:Name="Price2Label"
-                            VerticalTextAlignment="Center"
-                            HorizontalOptions="Start"
-                            TextColor="#4B4B4B"
-                            FontAttributes="Bold"
-                            Text="3"/>
-                    </StackLayout>
-                    <StackLayout
-                        Orientation="Horizontal"
-                        HorizontalOptions="EndAndExpand">
-                        <Label
-                            VerticalTextAlignment="Center"
-                            TextColor="#464646"
-                            FontAttributes="Bold"
-                            Text="0.99$"/>
-                        <Button
-                            VerticalOptions="Center"
-                            CornerRadius="20"
-                            BorderWidth="5"
-                            BorderColor="#4691D4"
-                            FontAttributes="Bold"
-                            BackgroundColor="White"
-                            TextColor="#4691D4"
-                            Command="{Binding GoToPayView}"
-                            CommandParameter="{Binding Source={x:Reference Price2Label}, Path=Text}"
-                            Text="Get"/>
-                    </StackLayout>
-                </StackLayout>
-            --><!--#endregion-->
-
-            <!--#region Price 3--><!--
-                <StackLayout
-                    Orientation="Horizontal"
-                    HorizontalOptions="FillAndExpand"
-                    BackgroundColor="White"
-                    Margin="0">
-                    <StackLayout
-                        Orientation="Horizontal">
-                        <Image
-                            Source="Follower.png"
-                            HorizontalOptions="Center"
-                            WidthRequest="20"
-                            HeightRequest="20"/>
-                        <Label
-                            x:Name="Price3Label"
-                            VerticalTextAlignment="Center"
-                            HorizontalOptions="Start"
-                            TextColor="#4B4B4B"
-                            FontAttributes="Bold"
-                            Text="12"/>
-                    </StackLayout>
-                    <StackLayout
-                        Orientation="Horizontal"
-                        HorizontalOptions="EndAndExpand">
-                        <Label
-                            VerticalTextAlignment="Center"
-                            TextColor="#464646"
-                            FontAttributes="Bold"
-                            Text="4.99$"/>
-                        <Button
-                            VerticalOptions="Center"
-                            CornerRadius="20"
-                            BorderWidth="5"
-                            BorderColor="#4691D4"
-                            FontAttributes="Bold"
-                            BackgroundColor="White"
-                            TextColor="#4691D4"
-                            Command="{Binding GoToPayView}"
-                            CommandParameter="{Binding Source={x:Reference Price3Label}, Path=Text}"
-                            Text="Get"/>
-                    </StackLayout>
-                </StackLayout>
-            --><!--#endregion-->
-
-            <!--#region Price 4--><!--
-                <StackLayout
-                    Orientation="Horizontal"
-                    HorizontalOptions="FillAndExpand"
-                    BackgroundColor="White"
-                    Margin="0">
-                    <StackLayout
-                        Orientation="Horizontal">
-                        <Image
-                            Source="Follower.png"
-                            HorizontalOptions="Center"
-                            WidthRequest="20"
-                            HeightRequest="20"/>
-                        <Label
-                            x:Name="Price4Label"
-                            VerticalTextAlignment="Center"
-                            HorizontalOptions="Start"
-                            TextColor="#4B4B4B"
-                            FontAttributes="Bold"
-                            Text="60"/>
-                    </StackLayout>
-                    <StackLayout
-                        Orientation="Horizontal"
-                        HorizontalOptions="EndAndExpand">
-                        <Label
-                            VerticalTextAlignment="Center"
-                            TextColor="#464646"
-                            FontAttributes="Bold"
-                            Text="19.99$"/>
-                        <Button
-                            VerticalOptions="Center"
-                            CornerRadius="20"
-                            BorderWidth="5"
-                            BorderColor="#4691D4"
-                            FontAttributes="Bold"
-                            BackgroundColor="White"
-                            TextColor="#4691D4"
-                            Command="{Binding GoToPayView}"
-                            CommandParameter="{Binding Source={x:Reference Price4Label}, Path=Text}"
-                            Text="Get"/>
-                    </StackLayout>
-                </StackLayout>
-            --><!--#endregion-->
-            
-            
-                <!--#endregion-->
-
-                <ListView
-                    x:Name="FollowersPricesListView"
-                    SeparatorVisibility="Default"
-                    SeparatorColor="Black">
-                    <ListView.Behaviors>
-                        <prism:EventToCommandBehavior 
-                            EventName="ItemTapped"
-                            Command="{Binding NavigatePayView}"
-                            CommandParameter="{Binding Source={x:Reference FollowersPricesListView}, Path=SelectedItem}"/>
-                    </ListView.Behaviors>
-                    <ListView.ItemTemplate>
+            <ListView
+                x:Name="FollowersPricesListView"
+                SeparatorVisibility="Default"
+                SeparatorColor="Black">
+                <ListView.Behaviors>
+                    <prism:EventToCommandBehavior 
+                        EventName="ItemTapped"
+                        Command="{Binding NavigatePayView}"
+                        CommandParameter="{Binding Source={x:Reference FollowersPricesListView}, Path=SelectedItem}"/>
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.ContextActions>
-                                <MenuItem Text="Edit" />
+                                <MenuItem Text="Edit"/>
                             </ViewCell.ContextActions>
                             <ViewCell.View>
                                 <StackLayout
@@ -387,7 +212,7 @@
                                             HorizontalOptions="Start"
                                             TextColor="#4B4B4B"
                                             FontAttributes="Bold"
-                                            Text="3"/>
+                                            Text="{Binding CountFollowers}"/>
                                     </StackLayout>
                                     <StackLayout
                                         Orientation="Horizontal"
@@ -396,7 +221,7 @@
                                             VerticalTextAlignment="Center"
                                             TextColor="#464646"
                                             FontAttributes="Bold"
-                                            Text="{Binding Price}"/>
+                                            Text="{Binding Cost}"/>
                                         <Button
                                             VerticalOptions="Center"
                                             CornerRadius="20"

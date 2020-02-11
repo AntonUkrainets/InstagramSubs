@@ -20,7 +20,6 @@ namespace InstagramSubs.Views
             InitializeComponent();
 
             InitFollowersPricesList();
-            InitImages();
         }
 
         protected async override void OnAppearing()
@@ -81,22 +80,16 @@ namespace InstagramSubs.Views
             CountDontFollowMeLabel.Text = $"{_userContext.CountUsersDontFollowMe}";
         }
 
-        private void InitImages()
-        {
-            FollowersImage.Source = ImageSource.FromFile("Follower.png");
-            CountFollowersImage.Source = ImageSource.FromFile("Follower.png");
-        }
-
         private void InitFollowersPricesList()
         {
-            FollowersPricesListView.ItemsSource = new List<FollowerPrice>
+            FollowersPricesListView.ItemsSource = new List<Price>
             {
-                new FollowerPrice { Count = "25", Price = "9.99$" },
-                new FollowerPrice { Count = "3", Price = "0.99$" },
-                new FollowerPrice { Count = "12", Price = "4.99$" },
-                new FollowerPrice { Count = "60", Price = "19.99$" },
-                new FollowerPrice { Count = "180", Price = "49.99$" },
-                new FollowerPrice { Count = "400", Price = "99.99$" }
+                new Price { CountFollowers = "25", Cost = "9.99$" },
+                new Price { CountFollowers = "3", Cost = "0.99$" },
+                new Price { CountFollowers = "12", Cost = "4.99$" },
+                new Price { CountFollowers = "60", Cost = "19.99$" },
+                new Price { CountFollowers = "180", Cost = "49.99$" },
+                new Price { CountFollowers = "400", Cost = "99.99$" }
             };
         }
     }
