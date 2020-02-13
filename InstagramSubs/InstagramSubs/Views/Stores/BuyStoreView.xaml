@@ -35,7 +35,7 @@
                                     HorizontalOptions="Start"
                                     TextColor="#EAA233"
                                     FontAttributes="Bold"
-                                    Text="{Binding Count}"/>
+                                    Text="{Binding CountFollowers}"/>
                             </StackLayout>
                             <StackLayout
                                 Orientation="Horizontal"
@@ -45,7 +45,7 @@
                                     HorizontalOptions="EndAndExpand"
                                     TextColor="#464646"
                                     FontAttributes="Bold"
-                                    Text="{Binding Price}"/>
+                                    Text="{Binding Cost}"/>
                             </StackLayout>
                         </StackLayout>
                     </Frame>

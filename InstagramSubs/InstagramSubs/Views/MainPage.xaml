@@ -9,8 +9,16 @@
     BarBackgroundColor="White"
     BarTextColor="#2196F3">
     
-    <views:FollowersView Title="Followers"/>
-    <views:StoreView Title="Store"/>
-    <views:SettingsView Title="Settings"/>
+    <views:FollowersView
+        Title="Followers"
+        IconImageSource="Follower.png"/>
+    <views:EarnCoinsView
+        Title="Earn Coins"/>
+    <views:StoreView
+        Title="Store"
+        IconImageSource="Store.jpg"/>
+    <views:SettingsView
+        Title="More"
+        IconImageSource="MoreIcon.png"/>
 
 </TabbedPage>

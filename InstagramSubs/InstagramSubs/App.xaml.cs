@@ -47,6 +47,8 @@ namespace InstagramSubs
             containerRegistry.RegisterForNavigation<BuyStoreView, BuyStoreViewViewModel>();
             containerRegistry.RegisterForNavigation<FreeStoreView, FreeStoreViewViewModel>();
             containerRegistry.RegisterForNavigation<PayView, PayViewViewModel>();
+            containerRegistry.RegisterForNavigation<HelperView, HelperViewViewModel>();
+            containerRegistry.RegisterForNavigation<EarnCoinsView, EarnCoinsViewViewModel>();
         }
     }
 }

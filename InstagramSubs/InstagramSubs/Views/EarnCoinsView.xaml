@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    x:Class="InstagramSubs.Views.EarnCoinsView"
+    BackgroundColor="#2196F3">
+
+    <StackLayout>
+        <Label
+            x:Name="CurrentUserLabel"
+            HorizontalOptions="Center"
+            TextColor="White"/>
+        <Image
+            x:Name="SubUserImage"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            WidthRequest="45"
+            HeightRequest="45"/>
+        <Label
+            x:Name="SubUserNameLabel"
+            Text="subUser"
+            HorizontalOptions="Center"
+            TextColor="White"/>
+        <StackLayout 
+            Orientation="Horizontal"
+            VerticalOptions="Center"
+            HorizontalOptions="Center">
+            <Image
+                Source="CancelIcon.png"
+                WidthRequest="30"
+                HeightRequest="30">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer 
+                        Command="{Binding SkipSubUser}"
+                        CommandParameter="{Binding Source={x:Reference SubUserNameLabel}, Path=Text}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Frame
+                BackgroundColor="White"
+                CornerRadius="15">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Follow"/>
+                    <Label 
+                        Text="+ 5"
+                        TextColor="#EAA233"/>
+                    <Image 
+                        Source="Coins.png"
+                        WidthRequest="15"
+                        HeightRequest="15"/>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </StackLayout>
+    
+</ContentPage>

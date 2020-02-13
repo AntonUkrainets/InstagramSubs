@@ -24,9 +24,10 @@ namespace InstagramSubs.Views
 
         public void OnNavigatedTo(INavigationParameters parameters)
         {
-            var price = parameters.GetValue<Price>("countFollowers");
+            var order = parameters.GetValue<Order>("countFollowers");
 
-            CountFollowersLabel.Text = $"{price.CountFollowers}";
+            CountFollowersLabel.Text = $"{order.CountFollowers}";
+            PayButton.Text += order.Cost;
         }
 
         protected async override void OnAppearing()

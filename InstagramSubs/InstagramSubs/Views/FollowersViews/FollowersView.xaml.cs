@@ -82,14 +82,14 @@ namespace InstagramSubs.Views
 
         private void InitFollowersPricesList()
         {
-            FollowersPricesListView.ItemsSource = new List<Price>
+            FollowersPricesListView.ItemsSource = new List<Order>
             {
-                new Price { CountFollowers = "25", Cost = "9.99$" },
-                new Price { CountFollowers = "3", Cost = "0.99$" },
-                new Price { CountFollowers = "12", Cost = "4.99$" },
-                new Price { CountFollowers = "60", Cost = "19.99$" },
-                new Price { CountFollowers = "180", Cost = "49.99$" },
-                new Price { CountFollowers = "400", Cost = "99.99$" }
+                new Order { CountFollowers = "25", Cost = "9.99$" },
+                new Order { CountFollowers = "3", Cost = "0.99$" },
+                new Order { CountFollowers = "12", Cost = "4.99$" },
+                new Order { CountFollowers = "60", Cost = "19.99$" },
+                new Order { CountFollowers = "180", Cost = "49.99$" },
+                new Order { CountFollowers = "400", Cost = "99.99$" }
             };
         }
     }

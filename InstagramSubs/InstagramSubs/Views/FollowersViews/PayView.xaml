@@ -5,7 +5,7 @@
     xmlns:prism="http://prismlibrary.com"
     prism:ViewModelLocator.AutowireViewModel="True"
     x:Class="InstagramSubs.Views.PayView"
-    BackgroundColor="#f7f8fa">
+    BackgroundColor="#F7F8FA">
 
     <StackLayout BackgroundColor="#2196F3">
         <StackLayout BackgroundColor="#2196F3">
@@ -79,7 +79,21 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        
+
+        <Button
+            x:Name="PayButton"
+            Text="Pay "
+            Command="{Binding Pay}"
+            CommandParameter="{Binding Source={x:Reference CountFollowersLabel}, Path=Text}"
+            BackgroundColor="#2196F3"
+            HorizontalOptions="Center"
+            VerticalOptions="EndAndExpand"
+            Margin="15"
+            BorderColor="White"
+            BorderWidth="3"
+            TextColor="White"
+            CornerRadius="15"/>
+
     </StackLayout>
     
 </ContentPage>

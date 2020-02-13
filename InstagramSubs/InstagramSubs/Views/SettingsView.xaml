@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com"
     mc:Ignorable="d"
     x:Class="InstagramSubs.Views.SettingsView"
     Title="{Binding Title}"
@@ -23,9 +24,16 @@
                 TextColor="White"
                 FontAttributes="Bold"/>
         </StackLayout>
+
         <StackLayout>
             <ListView
                 x:Name="ShopsList">
+                <ListView.Behaviors>
+                    <prism:EventToCommandBehavior
+                        EventName="ItemTapped"
+                        Command="{Binding NavigateHelperView}"
+                        CommandParameter="{Binding Source={x:Reference ShopsList}, Path=SelectedItem}"/>
+                </ListView.Behaviors>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -46,11 +54,6 @@
                 </ListView.ItemTemplate>
             </ListView>
         </StackLayout>
-        <!--<Label
-            BackgroundColor="White"
-            HorizontalOptions="FillAndExpand"
-            VerticalTextAlignment="Center"
-            Text="Settings"/>-->
     </StackLayout>
 
 </ContentPage>
